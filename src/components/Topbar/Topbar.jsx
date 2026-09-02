@@ -1,7 +1,6 @@
 // src/components/Topbar/Topbar.jsx
 // Top navigation bar with search, notifications, settings, and profile
 
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
   Search,
