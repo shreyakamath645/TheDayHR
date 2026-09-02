@@ -1,0 +1,409 @@
+/* src/pages/Dashboard/Dashboard.module.css */
+
+/* ── Hero Greeting ── */
+.greeting {
+  margin-bottom: 24px;
+}
+
+.greetTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 4px;
+}
+
+.greetSub {
+  font-size: 13.5px;
+  color: #64748b;
+  margin: 0;
+}
+
+.greetSub strong {
+  color: #4F46E5;
+}
+
+/* ── Stats Grid ── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 1100px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .statsGrid { grid-template-columns: 1fr; }
+}
+
+.statCard {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: default;
+}
+
+.statCard:hover {
+  box-shadow: 0 6px 20px rgba(79,70,229,0.1), 0 0 0 1px rgba(79,70,229,0.08);
+  transform: translateY(-2px);
+}
+
+.statHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.statIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statValue {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.statChange {
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.changeUp   { color: #16a34a; }
+.changeDown { color: #dc2626; }
+
+/* ── Two Column Layout ── */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1050px) {
+  .twoCol { grid-template-columns: 1fr; }
+}
+
+/* ── Section Card ── */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cardTitleIcon {
+  color: #4F46E5;
+  display: flex;
+}
+
+.viewAllBtn {
+  font-size: 12px;
+  color: #4F46E5;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.viewAllBtn:hover { background: #eef2ff; }
+
+/* ── Meeting List ── */
+.meetingList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.meetingItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #f8fafc;
+  transition: background 0.12s;
+  cursor: pointer;
+}
+
+.meetingItem:last-child { border-bottom: none; }
+.meetingItem:hover { background: #fafbff; }
+
+.meetingTime {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 52px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  padding: 8px 6px;
+}
+
+.meetingDate {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.meetingHour {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.meetingInfo { flex: 1; min-width: 0; }
+
+.meetingTitle {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+
+.meetingOrg {
+  font-size: 11.5px;
+  color: #64748b;
+}
+
+.meetingJoin {
+  padding: 6px 14px;
+  background: #4F46E5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+
+.meetingJoin:hover {
+  background: #4338ca;
+  transform: scale(1.03);
+}
+
+/* ── Chat Preview List ── */
+.chatList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chatItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f8fafc;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.chatItem:last-child { border-bottom: none; }
+.chatItem:hover { background: #fafbff; }
+
+.chatMeta { flex: 1; min-width: 0; }
+
+.chatName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chatMsg {
+  font-size: 12px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chatRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.chatTime {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.chatUnread {
+  background: #4F46E5;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 10px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* ── Activity Feed ── */
+.activityList {
+  list-style: none;
+  margin: 0;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.activityItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.activityLine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.activityDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4F46E5;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.activityDot.green  { background: #22c55e; }
+.activityDot.orange { background: #f59e0b; }
+.activityDot.red    { background: #ef4444; }
+
+.activityConnector {
+  width: 2px;
+  height: 100%;
+  min-height: 24px;
+  background: #e2e8f0;
+  flex: 1;
+}
+
+.activityContent { flex: 1; }
+
+.activityText {
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.45;
+}
+
+.activityText strong { color: #1e293b; font-weight: 600; }
+
+.activityTime {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+/* ── Quick Actions ── */
+.quickActions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 700px) {
+  .quickActions { grid-template-columns: repeat(2, 1fr); }
+}
+
+.qaBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  background: #fff;
+  border: 1.5px solid #e8edf4;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  text-align: center;
+}
+
+.qaBtn:hover {
+  border-color: #6366f1;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.12);
+  transform: translateY(-2px);
+}
+
+.qaIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.qaLabel {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+}

@@ -1,0 +1,35 @@
+/* src/layouts/MainLayout.module.css */
+
+.shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: #F5F7FB;
+}
+
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.pageContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.pageContent::-webkit-scrollbar { width: 6px; }
+.pageContent::-webkit-scrollbar-track { background: transparent; }
+.pageContent::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
+.pageContent::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+@media (max-width: 768px) {
+  .pageContent { padding: 16px; }
+}

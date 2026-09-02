@@ -1,0 +1,74 @@
+/* src/components/Avatar/Avatar.module.css */
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+}
+
+.sm {
+  width: 28px;
+  height: 28px;
+  font-size: 10px;
+}
+
+.md {
+  width: 36px;
+  height: 36px;
+  font-size: 13px;
+}
+
+.lg {
+  width: 44px;
+  height: 44px;
+  font-size: 16px;
+}
+
+.xl {
+  width: 56px;
+  height: 56px;
+  font-size: 20px;
+}
+
+.statusDot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-primary, #ffffff);
+}
+
+.sm .statusDot,
+.statusDot.sm {
+  width: 7px;
+  height: 7px;
+}
+
+.md .statusDot,
+.statusDot.md {
+  width: 9px;
+  height: 9px;
+}
+
+.lg .statusDot,
+.statusDot.lg {
+  width: 11px;
+  height: 11px;
+}
+
+.statusOnline { background: #22c55e; }
+.statusBusy   { background: #ef4444; }
+.statusAway   { background: #f59e0b; }
+.statusOffline { background: #94a3b8; }
