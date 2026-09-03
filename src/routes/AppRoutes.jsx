@@ -1,6 +1,6 @@
 // src/routes/AppRoutes.jsx
 // Central React Router DOM route configuration
-
+import Chat from "../pages/chat/chat";
 import { Routes, Route } from "react-router-dom";
 import MainLayout   from "../layouts/MainLayout";
 import Dashboard    from "../pages/Dashboard/Dashboard";
@@ -10,7 +10,7 @@ const AppRoutes = () => (
   <Routes>
     <Route element={<MainLayout />}>
       <Route index path="/"          element={<Dashboard />} />
-      <Route path="/chat"            element={<Placeholder title="Chat" />} />
+      <Route path="/chat"            element={<chat />} />
       <Route path="/meetings"        element={<Placeholder title="Meetings" />} />
       <Route path="/employees"       element={<Placeholder title="Employees" />} />
       <Route path="/calendar"        element={<Placeholder title="Calendar" />} />
