@@ -1,74 +1,89 @@
 // src/components/Dashboard/WelcomeBanner/WelcomeBanner.jsx
-// Premium Microsoft Teams-inspired Welcome Banner with gradient background and live date
+// Premium Welcome Banner with dynamic greeting, date, and contextual stats
 
-import { useMemo } from "react";
-import { FiCalendar, FiClock } from "react-icons/fi";
-import { HiOutlineSparkles } from "react-icons/hi2";
+import { useApp } from "../../../context/AppContext";
 import styles from "./WelcomeBanner.module.css";
+import { CalendarDays, Video, ArrowRight, Sparkles } from "lucide-react";
 
-const WelcomeBanner = ({
-  greeting = "Good Morning, Shreya 👋",
-  subtitle = "Welcome back to TheDayHR.",
-}) => {
-  // Format current date
-  const formattedDate = useMemo(() => {
-    const now = new Date();
-    const dateOptions = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    return now.toLocaleDateString("en-US", dateOptions);
-  }, []);
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 12) return "Good morning";
+  if (h < 17) return "Good afternoon";
+  return "Good evening";
+}
+
+function getFormattedDate() {
+  return new Date().toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function WelcomeBanner({ greeting, subtitle }) {
+  const { user } = useApp();
+  const firstName = user?.name?.split(" ")[0] || "Shreya";
+  const greetingText = greeting || `${getGreeting()}, ${firstName}! 👋`;
+  const dateText = getFormattedDate();
 
   return (
-    <div className={styles.bannerContainer}>
-      <div className={styles.bannerContent}>
-        {/* Left Welcome Info */}
-        <div className={styles.leftCol}>
-          <div className={styles.pillBadge}>
-            <HiOutlineSparkles className={styles.sparkleIcon} />
-            <span>HR Workspace • Overview</span>
-          </div>
+    <div className={styles.banner}>
+      {/* Decorative orbs */}
+      <div className={styles.orb1} aria-hidden="true" />
+      <div className={styles.orb2} aria-hidden="true" />
 
-          <h1 className={styles.greetingTitle}>{greeting}</h1>
+      <div className={styles.content}>
+        <div className={styles.left}>
+          <p className={styles.greeting}>{greetingText}</p>
+          <h1 className={styles.heading}>
+            {subtitle || "Your workspace is ready"}
+          </h1>
+          <p className={styles.subtext}>
+            Stay connected, manage your team, and track everything that matters — all in one place.
+          </p>
 
-          <p className={styles.subtitle}>{subtitle}</p>
-
-          <div className={styles.metaRow}>
-            <div className={styles.dateBadge}>
-              <FiCalendar className={styles.metaIcon} />
-              <span>{formattedDate}</span>
-            </div>
-            <div className={styles.statusPill}>
-              <span className={styles.onlineDot} />
-              <span>All HR systems operational</span>
-            </div>
+          <div className={styles.actions}>
+            <button className={styles.primaryBtn}>
+              <Video size={16} />
+              Join Today's Meeting
+            </button>
+            <button className={styles.ghostBtn}>
+              View Schedule
+              <ArrowRight size={15} />
+            </button>
           </div>
         </div>
 
-        {/* Right Decorative Graphic / Quick Stat Badge */}
-        <div className={styles.rightCol}>
-          <div className={styles.glassCard}>
-            <div className={styles.glassCardHeader}>
-              <span className={styles.glassIconWrap}>
-                <FiClock />
-              </span>
-              <div>
-                <span className={styles.glassLabel}>Today's Schedule</span>
-                <span className={styles.glassValue}>3 Meetings Planned</span>
-              </div>
+        <div className={styles.right}>
+          <div className={styles.dateCard}>
+            <div className={styles.dateIcon}>
+              <CalendarDays size={22} />
             </div>
-            <div className={styles.glassBar}>
-              <div className={styles.glassBarFill} style={{ width: "65%" }} />
+            <div>
+              <p className={styles.dateLabel}>Today</p>
+              <p className={styles.dateValue}>{dateText}</p>
             </div>
-            <span className={styles.glassFooter}>Next up: 10:30 AM Q3 Kickoff</span>
+          </div>
+
+          <div className={styles.statsRow}>
+            <div className={styles.statPill}>
+              <span className={styles.statNum}>3</span>
+              <span className={styles.statLabel}>Meetings</span>
+            </div>
+            <div className={styles.statPill}>
+              <span className={styles.statNum}>5</span>
+              <span className={styles.statLabel}>Tasks</span>
+            </div>
+            <div className={styles.statPill}>
+              <Sparkles size={12} />
+              <span className={styles.statLabel}>AI Ready</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default WelcomeBanner;

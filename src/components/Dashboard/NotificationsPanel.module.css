@@ -1,0 +1,50 @@
+.card{
+    background:white;
+    border-radius:22px;
+    padding:20px;
+    box-shadow:0 10px 24px rgba(37,99,235,.08);
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+    color:#1E3A8A;
+}
+
+.notification{
+    padding:14px;
+    border-radius:14px;
+    margin-bottom:12px;
+}
+
+.notification h4{
+    margin:0;
+    font-size:14px;
+}
+
+.notification span{
+    font-size:12px;
+    color:#64748B;
+}
+
+.meeting{
+    background:#E8F0FE;
+    border-left:5px solid #2563EB;
+}
+
+.success{
+    background:#ECFDF5;
+    border-left:5px solid #10B981;
+}
+
+.info{
+    background:#EFF6FF;
+    border-left:5px solid #3B82F6;
+}
+
+.holiday{
+    background:#FEF3C7;
+    border-left:5px solid #F59E0B;
+}

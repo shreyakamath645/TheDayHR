@@ -1,290 +1,282 @@
 /* src/components/Dashboard/TodayMeetings/TodayMeetings.module.css */
 
-.container {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  overflow: hidden;
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f0f2f8;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
+/* ── Header ── */
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
-  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
-.titleWrap {
+.headerLeft {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
-.headerIconBox {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: #eef2ff;
+.headerIcon {
   color: #4f46e5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
 }
 
-.title {
-  font-size: 16px;
+.header h3 {
+  font-size: 14.5px;
   font-weight: 700;
   color: #1e293b;
-  margin: 0 0 2px 0;
+  margin: 0;
 }
 
-.subtitle {
-  font-size: 12px;
-  color: #64748b;
-}
-
-.viewAllBtn {
-  display: inline-flex;
+.viewAll {
+  display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-  font-weight: 600;
+  gap: 4px;
+  font-size: 12px;
   color: #4f46e5;
-  background: transparent;
+  font-weight: 600;
+  background: none;
   border: none;
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 4px 8px;
   border-radius: 8px;
-  transition: all 0.15s ease;
+  transition: background 0.15s;
+  font-family: inherit;
 }
 
-.viewAllBtn:hover {
+.viewAll:hover {
   background: #eef2ff;
 }
 
-.linkIcon {
-  font-size: 13px;
-}
-
-.meetingsList {
-  padding: 16px 20px;
+/* ── List ── */
+.list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
 }
 
-.meetingCard {
+/* ── Meeting Row ── */
+.meeting {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid #f1f5f9;
-  background: #fafbfc;
-  transition: all 0.2s ease;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f8faff;
+  border: 1px solid #f0f4ff;
+  transition: background 0.18s, transform 0.15s, box-shadow 0.15s;
+  cursor: default;
 }
 
-.meetingCard:hover {
-  background: #ffffff;
-  border-color: #cbd5e1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+.meeting:hover {
+  background: #f0f4ff;
   transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.08);
 }
 
-.timeBox {
+.meetingLive {
+  background: #f0f9ff;
+  border-color: #bae6fd;
+}
+
+/* ── Time Column ── */
+.meetingLeft {
+  flex-shrink: 0;
+  width: 64px;
   display: flex;
   flex-direction: column;
+  gap: 3px;
+}
+
+.timeBlock {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  min-width: 68px;
-  padding: 8px 10px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  text-align: center;
+  gap: 3px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #4f46e5;
+}
+
+.clockIcon {
   flex-shrink: 0;
+  color: #818cf8;
 }
 
-.timeLabel {
-  font-size: 9px;
-  font-weight: 700;
-  color: #64748b;
-  letter-spacing: 0.5px;
-}
-
-.startTime {
-  font-size: 13px;
-  font-weight: 700;
-  color: #1e293b;
-  margin: 2px 0;
-}
-
-.duration {
+.durationBlock {
   font-size: 10.5px;
   color: #94a3b8;
+  font-weight: 500;
 }
 
-.meetingDetails {
+/* ── Body ── */
+.meetingBody {
   flex: 1;
   min-width: 0;
 }
 
-.titleRow {
+.meetingTop {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .meetingTitle {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: #1e293b;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
 }
 
+/* ── Status Badges ── */
 .statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 10px;
   font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
   flex-shrink: 0;
+  letter-spacing: 0.2px;
+}
+
+.statusLive {
+  background: #fef2f2;
+  color: #dc2626;
+  animation: pulseBadge 2s infinite;
 }
 
 .statusSoon {
-  background: #fef2f2;
-  color: #ef4444;
-  border: 1px solid #fee2e2;
+  background: #fffbeb;
+  color: #d97706;
 }
 
 .statusUpcoming {
-  background: #ecfdf5;
-  color: #059669;
-  border: 1px solid #d1fae5;
+  background: #f5f3ff;
+  color: #7c3aed;
 }
 
-.statusScheduled {
-  background: #f8fafc;
-  color: #64748b;
-  border: 1px solid #e2e8f0;
+.statusDone {
+  background: #f0fdf4;
+  color: #16a34a;
 }
 
-.metaRow {
+/* Animated live dot */
+.liveDot {
+  width: 6px;
+  height: 6px;
+  background: #ef4444;
+  border-radius: 50%;
+  animation: livePulse 1.2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+
+@keyframes pulseBadge {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+  50%       { box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1); }
+}
+
+/* ── Meta row ── */
+.meetingMeta {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  font-size: 12px;
+}
+
+.teamName {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
   color: #64748b;
-  margin-bottom: 8px;
-}
-
-.organizer strong {
-  color: #334155;
-}
-
-.bulletDot {
-  color: #cbd5e1;
-}
-
-.meetingType {
-  color: #6366f1;
   font-weight: 500;
 }
 
-.participantsSection {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
+/* ── Avatar Stack ── */
 .avatarStack {
   display: flex;
   align-items: center;
 }
 
-.stackItem {
-  margin-right: -8px;
-  border: 2px solid #ffffff;
-  border-radius: 50%;
+.stackAvatar {
+  margin-left: -6px;
+  border: 2px solid #fff;
+  border-radius: 50% !important;
 }
 
-.extraCount {
-  display: inline-flex;
+.stackAvatar:first-child {
+  margin-left: 0;
+}
+
+.moreCount {
+  margin-left: -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #e8edf4;
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #f1f5f9;
-  color: #475569;
-  font-size: 10px;
-  font-weight: 700;
-  border: 2px solid #ffffff;
-  margin-left: 2px;
-}
-
-.participantText {
-  font-size: 11.5px;
-  color: #64748b;
-  margin-left: 6px;
-}
-
-.actionCol {
+  border: 2px solid #fff;
   flex-shrink: 0;
 }
 
+/* ── Join Button ── */
 .joinBtn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: #4f46e5;
-  color: #ffffff;
+  gap: 5px;
+  background: #eef2ff;
+  color: #4f46e5;
   border: none;
-  border-radius: 8px;
-  font-size: 12.5px;
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 0 1px 2px rgba(79, 70, 229, 0.2);
+  transition: background 0.15s, transform 0.12s;
+  flex-shrink: 0;
+  font-family: inherit;
+  white-space: nowrap;
 }
 
 .joinBtn:hover {
-  background: #4338ca;
-  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
-  transform: translateY(-1px);
+  background: #4f46e5;
+  color: #fff;
+  transform: scale(1.03);
 }
 
-.joinIcon {
-  font-size: 14px;
+.joinBtnLive {
+  background: #fef2f2;
+  color: #dc2626;
 }
 
-@media (max-width: 680px) {
-  .meetingCard {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .timeBox {
-    align-self: flex-start;
-  }
-  .actionCol {
-    width: 100%;
-    margin-top: 8px;
-  }
-  .joinBtn {
-    width: 100%;
-    justify-content: center;
-  }
+.joinBtnLive:hover {
+  background: #dc2626;
+  color: #fff;
 }

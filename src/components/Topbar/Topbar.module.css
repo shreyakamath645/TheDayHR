@@ -1,17 +1,19 @@
 /* src/components/Topbar/Topbar.module.css */
 
+/* ── Topbar Shell ── */
 .topbar {
   display: flex;
   align-items: center;
-  height: 64px;
-  padding: 0 20px 0 16px;
+  height: 60px;
+  padding: 0 20px 0 20px;
   background: #ffffff;
-  border-bottom: 1px solid #e8edf4;
+  border-bottom: 1px solid #eef1f8;
   gap: 12px;
   position: sticky;
   top: 0;
   z-index: 90;
   flex-shrink: 0;
+  box-shadow: 0 1px 8px rgba(79, 70, 229, 0.05);
 }
 
 /* ── Page Title ── */
@@ -21,13 +23,14 @@
   color: #1e293b;
   white-space: nowrap;
   flex-shrink: 0;
+  letter-spacing: -0.2px;
 }
 
 /* ── Search ── */
 .searchWrapper {
   flex: 1;
-  max-width: 480px;
-  margin: 0 auto 0 12px;
+  max-width: 440px;
+  margin: 0 auto 0 16px;
   position: relative;
 }
 
@@ -43,11 +46,11 @@
 
 .searchInput {
   width: 100%;
-  padding: 9px 14px 9px 38px;
-  background: #f1f5f9;
+  padding: 9px 44px 9px 38px;
+  background: #f5f7fb;
   border: 1.5px solid transparent;
-  border-radius: 10px;
-  font-size: 13.5px;
+  border-radius: 12px;
+  font-size: 13px;
   color: #1e293b;
   outline: none;
   transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
@@ -61,22 +64,37 @@
 .searchInput:focus {
   background: #fff;
   border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.searchShortcut {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e8edf4;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 5px;
+  letter-spacing: 0.3px;
+  pointer-events: none;
 }
 
 /* ── Right Actions ── */
 .actions {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   margin-left: auto;
 }
 
 .iconBtn {
   position: relative;
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   border: none;
   background: transparent;
   display: flex;
@@ -84,162 +102,47 @@
   justify-content: center;
   cursor: pointer;
   color: #64748b;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, transform 0.12s;
 }
 
 .iconBtn:hover {
   background: #f1f5f9;
-  color: #4F46E5;
+  color: #4f46e5;
+  transform: scale(1.05);
 }
 
 .iconBtn.active {
   background: #eef2ff;
-  color: #4F46E5;
+  color: #4f46e5;
 }
 
 /* ── Notification Badge ── */
 .notifBadge {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  min-width: 16px;
-  height: 16px;
+  top: 4px;
+  right: 4px;
+  min-width: 15px;
+  height: 15px;
   background: #ef4444;
   color: #fff;
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 3px;
-  border: 2px solid #fff;
+  border: 1.5px solid #fff;
   line-height: 1;
 }
 
 /* ── Divider ── */
 .divider {
   width: 1px;
-  height: 24px;
+  height: 22px;
   background: #e2e8f0;
-  margin: 0 4px;
+  margin: 0 6px;
   flex-shrink: 0;
-}
-
-/* ── Notification Panel ── */
-.notifOverlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-}
-
-.notifPanel {
-  position: absolute;
-  top: 58px;
-  right: 16px;
-  width: 340px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.08);
-  z-index: 201;
-  overflow: hidden;
-  animation: panelIn 0.18s cubic-bezier(0.4,0,0.2,1);
-  border: 1px solid #e8edf4;
-}
-
-@keyframes panelIn {
-  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.panelHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px 10px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.panelTitle {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1e293b;
-}
-
-.markAllBtn {
-  font-size: 11.5px;
-  color: #4F46E5;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 6px;
-  transition: background 0.15s;
-}
-
-.markAllBtn:hover { background: #eef2ff; }
-
-.notifList {
-  max-height: 360px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-}
-
-.notifItem {
-  display: flex;
-  gap: 10px;
-  padding: 12px 16px;
-  border-bottom: 1px solid #f8fafc;
-  cursor: pointer;
-  transition: background 0.12s;
-  align-items: flex-start;
-}
-
-.notifItem:hover { background: #f8fafc; }
-.notifItem.unread { background: #fafbff; }
-.notifItem:last-child { border-bottom: none; }
-
-.notifIconWrap {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.notifIconWrap.mention  { background: #eef2ff; color: #4F46E5; }
-.notifIconWrap.meeting  { background: #f0fdf4; color: #16a34a; }
-.notifIconWrap.message  { background: #eff6ff; color: #2563eb; }
-.notifIconWrap.task     { background: #fff7ed; color: #ea580c; }
-.notifIconWrap.system   { background: #f8fafc; color: #64748b; }
-
-.notifContent { flex: 1; min-width: 0; }
-
-.notifMsg {
-  font-size: 12.5px;
-  color: #334155;
-  line-height: 1.45;
-  font-weight: 500;
-}
-
-.notifItem.unread .notifMsg { color: #1e293b; }
-
-.notifTime {
-  font-size: 11px;
-  color: #94a3b8;
-  margin-top: 3px;
-}
-
-.unreadDot {
-  width: 7px;
-  height: 7px;
-  background: #4F46E5;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 6px;
 }
 
 /* ── Profile Chip ── */
@@ -256,7 +159,9 @@
   background: transparent;
 }
 
-.profileChip:hover { background: #f1f5f9; }
+.profileChip:hover {
+  background: #f1f5f9;
+}
 
 .profileName {
   font-size: 13px;
@@ -265,7 +170,127 @@
   white-space: nowrap;
 }
 
+/* ── Notification Overlay ── */
+.notifOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+}
+
+/* ── Notification Panel ── */
+.notifPanel {
+  position: absolute;
+  top: 54px;
+  right: 16px;
+  width: 360px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.07);
+  z-index: 201;
+  overflow: hidden;
+  animation: panelIn 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #eef1f8;
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.panelTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.markAllBtn {
+  font-size: 11.5px;
+  color: #4f46e5;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.markAllBtn:hover { background: #eef2ff; }
+
+.notifList {
+  max-height: 380px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.notifItem {
+  display: flex;
+  gap: 12px;
+  padding: 12px 18px;
+  border-bottom: 1px solid #f8fafc;
+  cursor: pointer;
+  transition: background 0.12s;
+  align-items: flex-start;
+}
+
+.notifItem:hover { background: #f8fafc; }
+.notifItem.unread { background: #fafbff; }
+.notifItem:last-child { border-bottom: none; }
+
+.notifIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notifIconWrap.mention  { background: #eef2ff; color: #4f46e5; }
+.notifIconWrap.meeting  { background: #f0fdf4; color: #16a34a; }
+.notifIconWrap.message  { background: #eff6ff; color: #2563eb; }
+.notifIconWrap.task     { background: #fff7ed; color: #ea580c; }
+.notifIconWrap.system   { background: #f8fafc; color: #64748b; }
+
+.notifContent { flex: 1; min-width: 0; }
+
+.notifMsg {
+  font-size: 12.5px;
+  color: #334155;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.notifItem.unread .notifMsg { color: #1e293b; font-weight: 600; }
+
+.notifTime {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 3px;
+  display: block;
+}
+
+.unreadDot {
+  width: 7px;
+  height: 7px;
+  background: #4f46e5;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .searchWrapper { max-width: 200px; }
+  .searchWrapper { max-width: 180px; margin-left: 8px; }
   .profileName   { display: none; }
+  .searchShortcut { display: none; }
 }

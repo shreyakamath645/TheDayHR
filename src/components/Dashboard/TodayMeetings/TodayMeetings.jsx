@@ -1,122 +1,141 @@
 // src/components/Dashboard/TodayMeetings/TodayMeetings.jsx
-// Today's Meetings component with Teams video icon, participant avatars, and Join action
+// Premium Today's Meetings card — supports both passed props and local fallback data
 
 import { useNavigate } from "react-router-dom";
-import { FiVideo, FiExternalLink } from "react-icons/fi";
-import { HiOutlineVideoCamera } from "react-icons/hi2";
-import Avatar from "../../Avatar/Avatar";
 import styles from "./TodayMeetings.module.css";
+import { Video, Clock, Users, ArrowRight, Radio } from "lucide-react";
+import Avatar from "../../Avatar/Avatar";
 
-const TodayMeetings = ({ meetings = [] }) => {
+const LOCAL_MEETINGS = [
+  {
+    id: 1,
+    title: "HR Daily Standup",
+    time: "10:00 AM",
+    duration: "30 mins",
+    team: "HR Team",
+    status: "Live",
+    participants: [
+      { initials: "AM", status: "online" },
+      { initials: "DK", status: "online" },
+    ],
+    totalParticipants: 8,
+  },
+  {
+    id: 2,
+    title: "Recruitment Sync",
+    time: "11:30 AM",
+    duration: "45 mins",
+    team: "Hiring Team",
+    status: "Starting Soon",
+    participants: [
+      { initials: "SP", status: "busy" },
+      { initials: "RV", status: "online" },
+    ],
+    totalParticipants: 5,
+  },
+  {
+    id: 3,
+    title: "Design Review",
+    time: "3:00 PM",
+    duration: "60 mins",
+    team: "Design Team",
+    status: "Upcoming",
+    participants: [
+      { initials: "VS", status: "online" },
+    ],
+    totalParticipants: 6,
+  },
+];
+
+const STATUS_CONFIG = {
+  "Live":          { class: "statusLive",   label: "Live" },
+  "Starting Soon": { class: "statusSoon",   label: "Soon" },
+  "Upcoming":      { class: "statusUpcoming", label: "Upcoming" },
+  "Scheduled":     { class: "statusUpcoming", label: "Scheduled" },
+  "Completed":     { class: "statusDone",   label: "Done" },
+};
+
+function TodayMeetings({ meetings }) {
   const navigate = useNavigate();
-
-  // Take 3 meetings
-  const displayMeetings = meetings.slice(0, 3);
-
-  const handleJoin = (meeting, e) => {
-    e.stopPropagation();
-    alert(`Launching Microsoft Teams meeting: "${meeting.title}"`);
-  };
+  const data = meetings?.length ? meetings : LOCAL_MEETINGS;
+  const displayData = data.slice(0, 4);
 
   return (
-    <section className={styles.container} aria-label="Today's Meetings">
+    <div className={styles.card}>
       <div className={styles.header}>
-        <div className={styles.titleWrap}>
-          <span className={styles.headerIconBox}>
-            <HiOutlineVideoCamera className={styles.headerIcon} />
-          </span>
-          <div>
-            <h2 className={styles.title}>Today's Meetings</h2>
-            <span className={styles.subtitle}>Scheduled team video calls & reviews</span>
-          </div>
+        <div className={styles.headerLeft}>
+          <Video size={18} className={styles.headerIcon} />
+          <h3>Today's Meetings</h3>
         </div>
-        <button
-          className={styles.viewAllBtn}
-          onClick={() => navigate("/meetings")}
-          aria-label="View all meetings"
-        >
-          <span>View calendar</span>
-          <FiExternalLink className={styles.linkIcon} />
+        <button className={styles.viewAll} onClick={() => navigate("/meetings")}>
+          View all <ArrowRight size={13} />
         </button>
       </div>
 
-      <div className={styles.meetingsList}>
-        {displayMeetings.map((meeting) => (
-          <div key={meeting.id} className={styles.meetingCard}>
-            {/* Left Time Box */}
-            <div className={styles.timeBox}>
-              <span className={styles.timeLabel}>TODAY</span>
-              <span className={styles.startTime}>{meeting.time.split("–")[0].trim()}</span>
-              <span className={styles.duration}>{meeting.duration}</span>
-            </div>
+      <div className={styles.list}>
+        {displayData.map((meeting) => {
+          const statusKey = meeting.status || "Upcoming";
+          const statusCfg = STATUS_CONFIG[statusKey] || STATUS_CONFIG["Upcoming"];
+          const isLive = statusKey === "Live";
 
-            {/* Middle Info */}
-            <div className={styles.meetingDetails}>
-              <div className={styles.titleRow}>
-                <h3 className={styles.meetingTitle}>{meeting.title}</h3>
-                <span
-                  className={`${styles.statusBadge} ${
-                    meeting.status === "Starting Soon"
-                      ? styles.statusSoon
-                      : meeting.status === "Upcoming"
-                      ? styles.statusUpcoming
-                      : styles.statusScheduled
-                  }`}
-                >
-                  {meeting.status}
-                </span>
+          return (
+            <div key={meeting.id} className={`${styles.meeting} ${isLive ? styles.meetingLive : ""}`}>
+              <div className={styles.meetingLeft}>
+                <div className={styles.timeBlock}>
+                  <Clock size={11} className={styles.clockIcon} />
+                  <span>{meeting.time}</span>
+                </div>
+                <div className={styles.durationBlock}>{meeting.duration || "30 mins"}</div>
               </div>
 
-              <div className={styles.metaRow}>
-                <span className={styles.organizer}>
-                  Organized by <strong>{meeting.organizer}</strong>
-                </span>
-                <span className={styles.bulletDot}>•</span>
-                <span className={styles.meetingType}>{meeting.type}</span>
-              </div>
+              <div className={styles.meetingBody}>
+                <div className={styles.meetingTop}>
+                  <h4 className={styles.meetingTitle}>{meeting.title}</h4>
+                  <span className={`${styles.statusBadge} ${styles[statusCfg.class]}`}>
+                    {isLive && <span className={styles.liveDot} aria-hidden="true" />}
+                    {statusCfg.label}
+                  </span>
+                </div>
 
-              {/* Participant stack */}
-              <div className={styles.participantsSection}>
-                <div className={styles.avatarStack}>
-                  {meeting.participants.slice(0, 3).map((p, idx) => (
-                    <div
-                      key={p.id || idx}
-                      className={styles.stackItem}
-                      style={{ zIndex: 10 - idx }}
-                      title={p.name}
-                    >
-                      <Avatar initials={p.initials} size="sm" status={p.status} />
+                <div className={styles.meetingMeta}>
+                  <span className={styles.teamName}>
+                    <Users size={11} />
+                    {meeting.team || meeting.type}
+                  </span>
+                  {meeting.participants?.length > 0 && (
+                    <div className={styles.avatarStack}>
+                      {meeting.participants.slice(0, 3).map((p, i) => (
+                        <Avatar
+                          key={i}
+                          initials={p.initials}
+                          status={null}
+                          size="sm"
+                          className={styles.stackAvatar}
+                        />
+                      ))}
+                      {meeting.totalParticipants > 3 && (
+                        <span className={styles.moreCount}>
+                          +{meeting.totalParticipants - 3}
+                        </span>
+                      )}
                     </div>
-                  ))}
-                  {meeting.totalParticipants > 3 && (
-                    <span className={styles.extraCount}>
-                      +{meeting.totalParticipants - 3}
-                    </span>
                   )}
                 </div>
-                <span className={styles.participantText}>
-                  {meeting.totalParticipants} attendees
-                </span>
               </div>
-            </div>
 
-            {/* Right Join Button */}
-            <div className={styles.actionCol}>
               <button
-                id={`join-btn-${meeting.id}`}
-                className={styles.joinBtn}
-                onClick={(e) => handleJoin(meeting, e)}
-                aria-label={`Join meeting ${meeting.title}`}
+                className={`${styles.joinBtn} ${isLive ? styles.joinBtnLive : ""}`}
+                aria-label={`Join ${meeting.title}`}
               >
-                <FiVideo className={styles.joinIcon} />
-                <span>Join</span>
+                <Video size={14} />
+                {isLive ? "Join" : "Open"}
               </button>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
-    </section>
+    </div>
   );
-};
+}
 
 export default TodayMeetings;

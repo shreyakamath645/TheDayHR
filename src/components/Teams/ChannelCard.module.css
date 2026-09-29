@@ -1,0 +1,155 @@
+/* src/components/Teams/ChannelCard.module.css */
+
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #edf2f7;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.08);
+  border-color: #dbeafe;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.titleInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.iconCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #eef2ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 2px 0;
+}
+
+.department {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.badgeActive {
+  background: #ecfdf5;
+  color: #059669;
+}
+.badgeActive .badgeDot {
+  background: #10b981;
+}
+
+.badgeProgress {
+  background: #eff6ff;
+  color: #2563eb;
+}
+.badgeProgress .badgeDot {
+  background: #3b82f6;
+}
+
+.badgeReview {
+  background: #fffbeb;
+  color: #d97706;
+}
+.badgeReview .badgeDot {
+  background: #f59e0b;
+}
+
+.description {
+  font-size: 13px;
+  color: #475569;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.infoIcon {
+  color: #94a3b8;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  border-top: 1px solid #f8fafc;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #4f46e5;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.button:hover {
+  background: #eef2ff;
+  transform: translateX(2px);
+}

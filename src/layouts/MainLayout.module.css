@@ -5,7 +5,7 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background: #F5F7FB;
+  background: #f5f7fb;
 }
 
 .contentArea {
@@ -20,16 +20,25 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 24px;
+  padding: 24px 28px;
   scrollbar-width: thin;
   scrollbar-color: #cbd5e1 transparent;
 }
 
-.pageContent::-webkit-scrollbar { width: 6px; }
+.chatContent {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.pageContent::-webkit-scrollbar { width: 5px; }
 .pageContent::-webkit-scrollbar-track { background: transparent; }
 .pageContent::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
 .pageContent::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
+@media (max-width: 1024px) {
+  .pageContent { padding: 20px; }
+}
+
 @media (max-width: 768px) {
-  .pageContent { padding: 16px; }
+  .pageContent { padding: 16px 14px; }
 }

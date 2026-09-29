@@ -1,265 +1,269 @@
-/* src/components/Sidebar/Sidebar.module.css */
+/* src/components/Sidebar/Sidebar.module.css
+   Premium TheDayHR sidebar — deep indigo theme */
 
+/* ── Sidebar Shell ── */
 .sidebar {
+  width: 240px;
+  height: 100vh;
+  background: linear-gradient(180deg, #0f0c29 0%, #1a1060 50%, #121063 100%);
   display: flex;
   flex-direction: column;
-  width: 260px;
-  min-width: 260px;
-  height: 100vh;
-  background: #1e1f2e;
-  color: #e2e8f0;
-  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              min-width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  padding: 0;
+  border-radius: 0 24px 24px 0;
+  transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  z-index: 100;
+  overflow: hidden;
   flex-shrink: 0;
+  box-shadow: 4px 0 24px rgba(79, 70, 229, 0.15);
+  z-index: 50;
 }
 
 .sidebar.collapsed {
-  width: 64px;
-  min-width: 64px;
+  width: 72px;
 }
 
-/* ── Logo / Brand ── */
+/* ── Brand ── */
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 18px 16px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  min-height: 64px;
+  padding: 22px 18px 16px;
   flex-shrink: 0;
 }
 
 .logoMark {
-  width: 34px;
-  height: 34px;
-  background: linear-gradient(135deg, #6366f1 0%, #4F46E5 60%, #7c3aed 100%);
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 15px;
-  color: #fff;
+  color: white;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.5);
-  letter-spacing: -0.5px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
-.logoText {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+.brandName {
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
   white-space: nowrap;
+  letter-spacing: -0.3px;
+  background: linear-gradient(90deg, #fff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.logoName {
-  font-size: 15px;
-  font-weight: 700;
-  color: #f8fafc;
-  letter-spacing: -0.2px;
-  line-height: 1.2;
-}
-
-.logoSub {
-  font-size: 10px;
-  color: #94a3b8;
-  font-weight: 500;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-
-/* ── Toggle Button ── */
-.toggleBtn {
+/* ── Collapse Toggle ── */
+.collapseBtn {
   position: absolute;
-  top: 20px;
+  top: 28px;
   right: -12px;
   width: 24px;
   height: 24px;
-  background: #4F46E5;
-  border: 2px solid #1e1f2e;
+  background: #4f46e5;
+  border: 2px solid rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #fff;
-  transition: background 0.2s, transform 0.2s;
+  color: white;
   z-index: 10;
-  flex-shrink: 0;
+  transition: background 0.2s, transform 0.2s;
 }
 
-.toggleBtn:hover {
+.collapseBtn:hover {
   background: #6366f1;
+  transform: scale(1.1);
+}
+
+.collapseIcon {
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.collapseIconRotated {
+  transform: rotate(180deg);
 }
 
 /* ── Nav Section ── */
 .navSection {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 10px 8px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.1) transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 10px;
+  flex: 0 0 auto;
 }
 
-.navSection::-webkit-scrollbar { width: 4px; }
-.navSection::-webkit-scrollbar-track { background: transparent; }
-.navSection::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
-
-.sectionLabel {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #64748b;
-  padding: 12px 10px 6px;
+.navSectionLabel {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: rgba(165, 180, 252, 0.5);
+  letter-spacing: 1.2px;
+  padding: 8px 8px 4px;
   white-space: nowrap;
-  overflow: hidden;
-  transition: opacity 0.2s;
-}
-
-.collapsed .sectionLabel {
-  opacity: 0;
 }
 
 /* ── Nav Item ── */
 .navItem {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 10px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #94a3b8;
+  border-radius: 12px;
+  color: rgba(196, 181, 253, 0.8);
   text-decoration: none;
-  font-size: 13.5px;
-  font-weight: 500;
-  transition: background 0.15s, color 0.15s;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-bottom: 2px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, transform 0.15s;
   position: relative;
+  white-space: nowrap;
+  min-height: 42px;
 }
 
 .navItem:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #e2e8f0;
+  background: rgba(99, 102, 241, 0.2);
+  color: #e0e7ff;
+  transform: translateX(2px);
+  text-decoration: none;
 }
 
-.navItem.active {
-  background: rgba(99, 102, 241, 0.18);
-  color: #a5b4fc;
+.navItemActive {
+  background: rgba(99, 102, 241, 0.28) !important;
+  color: #fff !important;
+  box-shadow: inset 0 0 0 1px rgba(129, 140, 248, 0.25);
 }
 
-.navItem.active::before {
+.navItemActive::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 20%;
-  height: 60%;
+  top: 6px;
+  bottom: 6px;
   width: 3px;
-  background: #6366f1;
-  border-radius: 0 3px 3px 0;
+  background: #818cf8;
+  border-radius: 0 2px 2px 0;
 }
 
-.navIcon {
+/* ── Icon Wrap (for badge positioning) ── */
+.navIconWrap {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  min-width: 20px;
-  font-size: 18px;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
 }
 
-.navLabel {
-  overflow: hidden;
-  white-space: nowrap;
-  transition: opacity 0.2s, width 0.25s;
-}
-
-.sidebar.collapsed .navLabel,
-.sidebar.collapsed .sectionLabel {
-  opacity: 0;
-  width: 0;
-  pointer-events: none;
-}
-
-/* ── Badge ── */
-.badge {
-  margin-left: auto;
+.navBadge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 16px;
+  height: 16px;
   background: #ef4444;
   color: #fff;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 10px;
-  min-width: 18px;
-  text-align: center;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  border: 1.5px solid rgba(15, 12, 41, 0.8);
+}
+
+/* ── Nav Label ── */
+.navLabel {
+  font-size: 13.5px;
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navArrow {
+  color: rgba(165, 180, 252, 0.6);
   flex-shrink: 0;
-  transition: opacity 0.2s;
 }
 
-.sidebar.collapsed .badge {
-  opacity: 0;
-  pointer-events: none;
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: rgba(99, 102, 241, 0.15);
+  margin: 8px 18px;
+  flex-shrink: 0;
 }
 
-/* ── User Profile at Bottom ── */
-.userSection {
-  padding: 12px 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+/* ── Bottom Section ── */
+.bottomSection {
+  margin-top: auto;
+  padding: 8px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Profile Row ── */
+.profileRow {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 10px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.18s;
+  margin-top: 4px;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
-.userInfo {
-  overflow: hidden;
-  flex: 1;
+.profileRow:hover {
+  background: rgba(99, 102, 241, 0.15);
 }
 
-.userName {
-  font-size: 13px;
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.profileName {
+  font-size: 12.5px;
   font-weight: 600;
-  color: #e2e8f0;
+  color: #e0e7ff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.userRole {
+.profileRole {
   font-size: 11px;
-  color: #64748b;
+  color: rgba(165, 180, 252, 0.6);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.sidebar.collapsed .userInfo {
-  opacity: 0;
-  width: 0;
-  pointer-events: none;
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 72px;
+  }
+  .brandName,
+  .navLabel,
+  .navArrow,
+  .navSectionLabel,
+  .profileInfo {
+    display: none;
+  }
+  .collapseBtn { display: none; }
 }
 
-/* ── Tooltip (collapsed mode) ── */
-.navItem[data-tooltip]:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  left: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #1e293b;
-  color: #e2e8f0;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  white-space: nowrap;
-  z-index: 999;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  pointer-events: none;
+@media (max-width: 640px) {
+  .sidebar {
+    display: none;
+  }
 }

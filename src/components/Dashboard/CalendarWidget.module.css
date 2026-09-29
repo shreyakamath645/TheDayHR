@@ -1,0 +1,36 @@
+.calendar{
+    background:white;
+    border-radius:22px;
+    padding:20px;
+    box-shadow:0 10px 24px rgba(37,99,235,.08);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+    margin:20px 0;
+}
+
+.date{
+    padding:10px;
+    text-align:center;
+    border-radius:12px;
+    background:#EFF6FF;
+}
+
+.today{
+    padding:10px;
+    text-align:center;
+    border-radius:12px;
+    background:#2563EB;
+    color:white;
+    font-weight:bold;
+}
+
+.event{
+    margin-top:12px;
+    background:#F8FAFC;
+    padding:10px;
+    border-radius:10px;
+}

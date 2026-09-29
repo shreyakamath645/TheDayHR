@@ -1,78 +1,76 @@
 // src/components/Dashboard/OnlineEmployees/OnlineEmployees.jsx
-// Online Employees widget showing active team members with status indicators and quick contact
+// Online Employees widget — shows active team members with status and quick message action
 
 import { useNavigate } from "react-router-dom";
-import { FiMessageSquare, FiExternalLink } from "react-icons/fi";
-import { HiOutlineUserGroup } from "react-icons/hi2";
-import Avatar from "../../Avatar/Avatar";
 import styles from "./OnlineEmployees.module.css";
+import { employees as dummyEmployees } from "../../../data/dummyData";
+import { Users, MessageCircle, ArrowRight } from "lucide-react";
+import Avatar from "../../Avatar/Avatar";
 
-const OnlineEmployees = ({ employees = [] }) => {
+const STATUS_LABEL = {
+  online: "Available",
+  busy:   "Busy",
+  away:   "Away",
+  offline: "Offline",
+};
+
+function OnlineEmployees({ employees: passedEmployees }) {
   const navigate = useNavigate();
-
-  // Filter or show active/online team members
-  const onlineList = employees.filter((emp) => emp.status === "online");
-  const displayList = onlineList.length > 0 ? onlineList : employees.slice(0, 5);
-
-  const handleMessage = (emp, e) => {
-    e.stopPropagation();
-    navigate(`/chat?empId=${emp.id}`);
-  };
+  const allEmployees = passedEmployees?.length ? passedEmployees : dummyEmployees;
+  // Show online + away employees first
+  const sorted = [...allEmployees].sort((a, b) => {
+    const priority = { online: 0, away: 1, busy: 2, offline: 3 };
+    return (priority[a.status] ?? 4) - (priority[b.status] ?? 4);
+  });
+  const displayed = sorted.filter((e) => e.status !== "offline").slice(0, 6);
+  const onlineCount = allEmployees.filter((e) => e.status === "online").length;
 
   return (
-    <section className={styles.container} aria-label="Online Employees">
+    <div className={styles.card}>
       <div className={styles.header}>
-        <div className={styles.titleWrap}>
-          <span className={styles.headerIconBox}>
-            <HiOutlineUserGroup className={styles.headerIcon} />
-          </span>
-          <div>
-            <div className={styles.titleRow}>
-              <h2 className={styles.title}>Online Employees</h2>
-              <span className={styles.liveIndicator}>
-                <span className={styles.pulsingDot} />
-                LIVE
-              </span>
-            </div>
-            <span className={styles.subtitle}>{displayList.length} colleagues available now</span>
-          </div>
+        <div className={styles.headerLeft}>
+          <Users size={18} className={styles.headerIcon} />
+          <h3>Online Now</h3>
         </div>
-        <button
-          className={styles.viewAllBtn}
-          onClick={() => navigate("/employees")}
-          aria-label="View all employees"
-        >
-          <span>Directory</span>
-          <FiExternalLink className={styles.linkIcon} />
-        </button>
+        <div className={styles.headerRight}>
+          <span className={styles.onlinePill}>
+            <span className={styles.onlineDot} />
+            {onlineCount} online
+          </span>
+          <button className={styles.viewAll} onClick={() => navigate("/employees")}>
+            All <ArrowRight size={13} />
+          </button>
+        </div>
       </div>
 
-      <div className={styles.employeeGrid}>
-        {displayList.map((emp) => (
-          <div key={emp.id} className={styles.employeeCard} title={`${emp.name} (${emp.role})`}>
-            <div className={styles.avatarContainer}>
-              <Avatar initials={emp.initials} status="online" size="lg" />
+      <div className={styles.list}>
+        {displayed.map((employee) => (
+          <button
+            key={employee.id}
+            className={styles.employee}
+            onClick={() => navigate("/chat")}
+            aria-label={`Message ${employee.name}`}
+          >
+            <Avatar initials={employee.initials} status={employee.status} size="md" />
+
+            <div className={styles.info}>
+              <span className={styles.name}>{employee.name}</span>
+              <span className={styles.role}>{employee.role}</span>
             </div>
-            <div className={styles.employeeInfo}>
-              <span className={styles.empName}>{emp.name}</span>
-              <span className={styles.empRole}>{emp.role}</span>
-              <span className={styles.empDept}>{emp.department}</span>
+
+            <div className={styles.actions}>
+              <span className={`${styles.statusLabel} ${styles[`status_${employee.status}`]}`}>
+                {STATUS_LABEL[employee.status] || employee.status}
+              </span>
+              <span className={styles.msgIcon}>
+                <MessageCircle size={14} />
+              </span>
             </div>
-            <div className={styles.cardActions}>
-              <button
-                className={styles.actionBtn}
-                onClick={(e) => handleMessage(emp, e)}
-                title={`Chat with ${emp.name}`}
-                aria-label={`Chat with ${emp.name}`}
-              >
-                <FiMessageSquare />
-              </button>
-            </div>
-          </div>
+          </button>
         ))}
       </div>
-    </section>
+    </div>
   );
-};
+}
 
 export default OnlineEmployees;

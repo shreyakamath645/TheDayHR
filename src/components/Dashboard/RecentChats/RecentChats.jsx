@@ -1,89 +1,66 @@
 // src/components/Dashboard/RecentChats/RecentChats.jsx
-// Recent Chats Preview showing 5 recent conversations with status, unread badges, and time
+// Premium Recent Chats card with online status, unread badges, and hover effects
 
 import { useNavigate } from "react-router-dom";
-import { FiExternalLink } from "react-icons/fi";
-import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
-import Avatar from "../../Avatar/Avatar";
 import styles from "./RecentChats.module.css";
+import { recentChats } from "../../../data/dummyData";
+import { MessageCircle, ArrowRight } from "lucide-react";
+import Avatar from "../../Avatar/Avatar";
 
-const RecentChats = ({ chats = [] }) => {
+function RecentChats({ chats }) {
   const navigate = useNavigate();
-
-  // Show 5 recent conversations
-  const displayChats = chats.slice(0, 5);
-
-  const handleOpenChat = (chatId) => {
-    navigate(`/chat?id=${chatId}`);
-  };
+  const data = chats?.length ? chats : recentChats;
 
   return (
-    <section className={styles.container} aria-label="Recent Chats Preview">
+    <div className={styles.card}>
       <div className={styles.header}>
-        <div className={styles.titleWrap}>
-          <span className={styles.headerIconBox}>
-            <HiOutlineChatBubbleLeftRight className={styles.headerIcon} />
-          </span>
-          <div>
-            <h2 className={styles.title}>Recent Chats</h2>
-            <span className={styles.subtitle}>Direct messages & team channels</span>
-          </div>
+        <div className={styles.headerLeft}>
+          <MessageCircle size={18} className={styles.headerIcon} />
+          <h3>Recent Chats</h3>
         </div>
-        <button
-          className={styles.viewAllBtn}
-          onClick={() => navigate("/chat")}
-          aria-label="View all chats"
-        >
-          <span>Open chat</span>
-          <FiExternalLink className={styles.linkIcon} />
+        <button className={styles.viewAll} onClick={() => navigate("/chat")}>
+          View all <ArrowRight size={13} />
         </button>
       </div>
 
-      <div className={styles.chatList} role="list">
-        {displayChats.map((chat) => (
-          <div
+      <div className={styles.list}>
+        {data.slice(0, 5).map((chat) => (
+          <button
             key={chat.id}
-            className={`${styles.chatItem} ${chat.unread > 0 ? styles.unreadItem : ""}`}
-            onClick={() => handleOpenChat(chat.id)}
-            role="listitem"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && handleOpenChat(chat.id)}
+            className={`${styles.chatItem} ${chat.unread > 0 ? styles.hasUnread : ""}`}
+            onClick={() => navigate("/chat")}
+            aria-label={`Chat with ${chat.name} – ${chat.unread > 0 ? `${chat.unread} unread` : "no unread messages"}`}
           >
-            {/* Avatar */}
             <div className={styles.avatarWrap}>
               <Avatar
-                initials={chat.avatarInitials || chat.name.slice(0, 2).toUpperCase()}
+                initials={chat.avatarInitials}
                 status={chat.isGroup ? null : chat.status}
                 size="md"
               />
             </div>
 
-            {/* Chat Details */}
-            <div className={styles.chatDetails}>
-              <div className={styles.chatTopRow}>
-                <span className={styles.chatName}>
+            <div className={styles.info}>
+              <div className={styles.topRow}>
+                <span className={styles.name}>
                   {chat.name}
-                  {chat.isGroup && <span className={styles.groupBadge}>Group</span>}
+                  {chat.isGroup && <span className={styles.groupTag}>Group</span>}
                 </span>
-                <span className={`${styles.chatTime} ${chat.unread > 0 ? styles.unreadTime : ""}`}>
-                  {chat.time}
-                </span>
+                <span className={styles.time}>{chat.time}</span>
               </div>
-
-              <div className={styles.chatBottomRow}>
-                <p className={styles.lastMessage}>{chat.lastMessage}</p>
+              <div className={styles.bottomRow}>
+                <p className={styles.message}>{chat.lastMessage}</p>
                 {chat.unread > 0 && (
-                  <span className={styles.unreadBadge} aria-label={`${chat.unread} unread messages`}>
+                  <span className={styles.badge} aria-label={`${chat.unread} unread`}>
                     {chat.unread}
                   </span>
                 )}
               </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
-    </section>
+    </div>
   );
-};
+}
 
 export default RecentChats;

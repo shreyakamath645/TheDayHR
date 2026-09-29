@@ -12,21 +12,24 @@ import {
   CheckSquare,
   AlertCircle,
   ChevronDown,
+  HelpCircle,
 } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import Avatar from "../Avatar/Avatar";
 import styles from "./Topbar.module.css";
 
 const PAGE_TITLES = {
-  "/":           "Dashboard",
-  "/chat":       "Chat",
-  "/meetings":   "Meetings",
-  "/employees":  "Employees",
-  "/calendar":   "Calendar",
-  "/files":      "Files",
-  "/analytics":  "Analytics",
-  "/settings":   "Settings",
-  "/help":       "Help & Support",
+  "/":               "Dashboard",
+  "/chat":           "Chat",
+  "/teams":          "Teams",
+  "/meetings":       "Meetings",
+  "/employees":      "Employees",
+  "/calendar":       "Calendar",
+  "/announcements":  "Announcements",
+  "/files":          "Documents",
+  "/analytics":      "Analytics",
+  "/settings":       "Settings",
+  "/help":           "Help & Support",
 };
 
 const NOTIF_ICONS = {
@@ -64,18 +67,19 @@ const Topbar = () => {
       {/* Search */}
       <div className={styles.searchWrapper}>
         <span className={styles.searchIcon}>
-          <Search size={15} />
+          <Search size={14} />
         </span>
         <input
           id="topbar-search"
           type="text"
           className={styles.searchInput}
-          placeholder="Search employees, chats, meetings…"
+          placeholder="Search people, chats, teams…"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           aria-label="Global search"
           autoComplete="off"
         />
+        <span className={styles.searchShortcut}>⌘K</span>
       </div>
 
       {/* Right Actions */}
@@ -88,12 +92,22 @@ const Topbar = () => {
           aria-label={`Notifications – ${unreadCount} unread`}
           title="Notifications"
         >
-          <Bell size={19} />
+          <Bell size={18} />
           {unreadCount > 0 && (
             <span className={styles.notifBadge} aria-hidden="true">
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
           )}
+        </button>
+
+        {/* Help */}
+        <button
+          id="help-btn"
+          className={styles.iconBtn}
+          aria-label="Help"
+          title="Help & Support"
+        >
+          <HelpCircle size={18} />
         </button>
 
         {/* Settings */}
@@ -103,7 +117,7 @@ const Topbar = () => {
           aria-label="Settings"
           title="Settings"
         >
-          <Settings size={19} />
+          <Settings size={18} />
         </button>
 
         <span className={styles.divider} aria-hidden="true" />
@@ -114,7 +128,7 @@ const Topbar = () => {
           className={styles.profileChip}
           aria-label="Open profile menu"
         >
-          <Avatar initials={user.initials} status={user.status} size="md" />
+          <Avatar initials={user.initials} status={user.status} size="sm" />
           <span className={styles.profileName}>{user.name.split(" ")[0]}</span>
           <ChevronDown size={13} color="#94a3b8" />
         </button>

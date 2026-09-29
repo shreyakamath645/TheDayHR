@@ -1,124 +1,155 @@
 // src/components/Sidebar/Sidebar.jsx
-// Microsoft Teams-inspired collapsible sidebar navigation
+// Premium TheDayHR sidebar navigation with active states, tooltips, and routing
 
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
-  MessageSquare,
-  Video,
+  MessageCircle,
   Users,
-  Calendar,
+  CalendarDays,
+  Video,
+  UserCheck,
+  Megaphone,
   FolderOpen,
-  BarChart2,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
   HelpCircle,
+  Settings,
+  ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import Avatar from "../Avatar/Avatar";
 import styles from "./Sidebar.module.css";
 
-const NAV_ITEMS = [
-  { id: "dashboard",  label: "Dashboard",  path: "/",          icon: LayoutDashboard, badge: null },
-  { id: "chat",       label: "Chat",        path: "/chat",      icon: MessageSquare,   badge: 3    },
-  { id: "meetings",   label: "Meetings",    path: "/meetings",  icon: Video,           badge: null },
-  { id: "employees",  label: "Employees",   path: "/employees", icon: Users,           badge: null },
-  { id: "calendar",   label: "Calendar",    path: "/calendar",  icon: Calendar,        badge: null },
-  { id: "files",      label: "Files",       path: "/files",     icon: FolderOpen,      badge: null },
-  { id: "analytics",  label: "Analytics",   path: "/analytics", icon: BarChart2,       badge: null },
+const PRIMARY_NAV = [
+  { id: "dashboard", label: "Dashboard",  path: "/",          icon: LayoutDashboard },
+  { id: "chat",      label: "Chat",        path: "/chat",       icon: MessageCircle,   badge: 8 },
+  { id: "teams",     label: "Teams",       path: "/teams",      icon: Users },
+  { id: "calendar",  label: "Calendar",    path: "/calendar",   icon: CalendarDays,    badge: 3 },
+  { id: "meetings",  label: "Meetings",    path: "/meetings",   icon: Video },
+  { id: "employees", label: "Employees",   path: "/employees",  icon: UserCheck },
 ];
 
-const BOTTOM_ITEMS = [
-  { id: "settings", label: "Settings",  path: "/settings", icon: Settings },
-  { id: "help",     label: "Help",      path: "/help",     icon: HelpCircle },
+const SECONDARY_NAV = [
+  { id: "announcements", label: "Announcements", path: "/announcements", icon: Megaphone },
+  { id: "files",         label: "Documents",      path: "/files",         icon: FolderOpen },
+  { id: "help",          label: "Help & Support", path: "/help",          icon: HelpCircle },
 ];
 
-const Sidebar = () => {
-  const { sidebarCollapsed, setSidebarCollapsed, user } = useApp();
+function NavItem({ item, collapsed }) {
   const location = useLocation();
-
-  const toggle = () => setSidebarCollapsed((c) => !c);
-
-  const isActive = (path) =>
-    path === "/" ? location.pathname === "/" : location.pathname.startsWith(path);
+  const isActive = item.path === "/"
+    ? location.pathname === "/"
+    : location.pathname.startsWith(item.path);
+  const Icon = item.icon;
 
   return (
-    <aside className={`${styles.sidebar} ${sidebarCollapsed ? styles.collapsed : ""}`}>
-      {/* ── Brand ── */}
+    <NavLink
+      to={item.path}
+      className={`${styles.navItem} ${isActive ? styles.navItemActive : ""}`}
+      title={collapsed ? item.label : undefined}
+      aria-label={item.label}
+      end={item.path === "/"}
+    >
+      <span className={styles.navIconWrap}>
+        <Icon size={20} strokeWidth={isActive ? 2.2 : 1.8} />
+        {item.badge && (
+          <span className={styles.navBadge}>{item.badge}</span>
+        )}
+      </span>
+      {!collapsed && (
+        <span className={styles.navLabel}>{item.label}</span>
+      )}
+      {!collapsed && isActive && (
+        <ChevronRight size={14} className={styles.navArrow} />
+      )}
+    </NavLink>
+  );
+}
+
+function Sidebar() {
+  const { user } = useApp();
+  const [collapsed, setCollapsed] = useState(false);
+
+  return (
+    <aside
+      className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}
+      aria-label="Main navigation"
+    >
+      {/* Brand / Logo */}
       <div className={styles.brand}>
-        <div className={styles.logoMark}>TD</div>
-        <div className={styles.logoText}>
-          <span className={styles.logoName}>TheDayHR</span>
-          <span className={styles.logoSub}>Workspace</span>
+        <div className={styles.logoMark}>
+          <Sparkles size={18} strokeWidth={2.5} />
         </div>
-        <button
-          className={styles.toggleBtn}
-          onClick={toggle}
-          aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-          title={sidebarCollapsed ? "Expand" : "Collapse"}
-        >
-          {sidebarCollapsed ? (
-            <ChevronRight size={13} />
-          ) : (
-            <ChevronLeft size={13} />
-          )}
-        </button>
+        {!collapsed && (
+          <span className={styles.brandName}>TheDayHR</span>
+        )}
       </div>
 
-      {/* ── Main Navigation ── */}
-      <nav className={styles.navSection} aria-label="Main navigation">
-        <span className={styles.sectionLabel}>Main</span>
+      {/* Collapse Toggle */}
+      <button
+        className={styles.collapseBtn}
+        onClick={() => setCollapsed((c) => !c)}
+        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+      >
+        <ChevronRight
+          size={16}
+          className={`${styles.collapseIcon} ${collapsed ? styles.collapseIconRotated : ""}`}
+        />
+      </button>
 
-        {NAV_ITEMS.map(({ id, label, path, icon: Icon, badge }) => (
-          <NavLink
-            key={id}
-            to={path}
-            end={path === "/"}
-            className={`${styles.navItem} ${isActive(path) ? styles.active : ""}`}
-            data-tooltip={sidebarCollapsed ? label : undefined}
-            aria-label={label}
-            title={sidebarCollapsed ? label : ""}
-          >
-            <span className={styles.navIcon}>
-              <Icon size={18} strokeWidth={isActive(path) ? 2.2 : 1.8} />
-            </span>
-            <span className={styles.navLabel}>{label}</span>
-            {badge && <span className={styles.badge}>{badge}</span>}
-          </NavLink>
-        ))}
-
-        <span className={styles.sectionLabel} style={{ marginTop: 12 }}>
-          Tools
-        </span>
-
-        {BOTTOM_ITEMS.map(({ id, label, path, icon: Icon }) => (
-          <NavLink
-            key={id}
-            to={path}
-            className={`${styles.navItem} ${isActive(path) ? styles.active : ""}`}
-            data-tooltip={sidebarCollapsed ? label : undefined}
-            aria-label={label}
-            title={sidebarCollapsed ? label : ""}
-          >
-            <span className={styles.navIcon}>
-              <Icon size={18} strokeWidth={1.8} />
-            </span>
-            <span className={styles.navLabel}>{label}</span>
-          </NavLink>
+      {/* Primary Navigation */}
+      <nav className={styles.navSection} aria-label="Primary navigation">
+        {!collapsed && (
+          <span className={styles.navSectionLabel}>WORKSPACE</span>
+        )}
+        {PRIMARY_NAV.map((item) => (
+          <NavItem key={item.id} item={item} collapsed={collapsed} />
         ))}
       </nav>
 
-      {/* ── User Profile ── */}
-      <div className={styles.userSection}>
-        <Avatar initials={user.initials} status={user.status} size="md" />
-        <div className={styles.userInfo}>
-          <div className={styles.userName}>{user.name}</div>
-          <div className={styles.userRole}>{user.role}</div>
+      {/* Divider */}
+      <div className={styles.divider} />
+
+      {/* Secondary Navigation */}
+      <nav className={styles.navSection} aria-label="HR section navigation">
+        {!collapsed && (
+          <span className={styles.navSectionLabel}>HR & TOOLS</span>
+        )}
+        {SECONDARY_NAV.map((item) => (
+          <NavItem key={item.id} item={item} collapsed={collapsed} />
+        ))}
+      </nav>
+
+      {/* Bottom */}
+      <div className={styles.bottomSection}>
+        <NavLink
+          to="/settings"
+          className={({ isActive }) =>
+            `${styles.navItem} ${isActive ? styles.navItemActive : ""}`
+          }
+          title={collapsed ? "Settings" : undefined}
+          aria-label="Settings"
+        >
+          <span className={styles.navIconWrap}>
+            <Settings size={20} strokeWidth={1.8} />
+          </span>
+          {!collapsed && <span className={styles.navLabel}>Settings</span>}
+        </NavLink>
+
+        <div className={styles.profileRow} title={user?.name}>
+          <Avatar initials={user?.initials || "SK"} status={user?.status || "online"} size="sm" />
+          {!collapsed && (
+            <div className={styles.profileInfo}>
+              <span className={styles.profileName}>{user?.name || "Shreya Kamath"}</span>
+              <span className={styles.profileRole}>{user?.role || "HR Manager"}</span>
+            </div>
+          )}
         </div>
       </div>
     </aside>
   );
-};
+}
 
 export default Sidebar;

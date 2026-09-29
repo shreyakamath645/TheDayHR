@@ -1,66 +1,75 @@
 // src/components/Dashboard/HRAnnouncements/HRAnnouncements.jsx
-// HR Announcements Preview component with category badges, author tags, and formatted dates
+// Premium HR Announcements card using real dummyData with priority badges
 
-import { FiCalendar, FiArrowRight } from "react-icons/fi";
-import { HiOutlineMegaphone } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 import styles from "./HRAnnouncements.module.css";
+import { hrAnnouncements } from "../../../data/dummyData";
+import { Megaphone, ArrowRight, ChevronRight } from "lucide-react";
 
-const HRAnnouncements = ({ announcements = [] }) => {
+const PRIORITY_CONFIG = {
+  Important: { class: "priorityImportant", dot: "#ef4444" },
+  Event:     { class: "priorityEvent",     dot: "#8b5cf6" },
+  Notice:    { class: "priorityNotice",    dot: "#3b82f6" },
+  High:      { class: "priorityImportant", dot: "#ef4444" },
+  New:       { class: "priorityNew",       dot: "#059669" },
+};
+
+function HRAnnouncements({ announcements: passedAnnouncements }) {
+  const navigate = useNavigate();
+  const data = passedAnnouncements?.length ? passedAnnouncements : hrAnnouncements;
+
   return (
-    <section id="announcements" className={styles.container} aria-label="HR Announcements Preview">
+    <div className={styles.card}>
       <div className={styles.header}>
-        <div className={styles.titleWrap}>
-          <span className={styles.headerIconBox}>
-            <HiOutlineMegaphone className={styles.headerIcon} />
-          </span>
+        <div className={styles.headerLeft}>
+          <div className={styles.headerIconWrap}>
+            <Megaphone size={18} />
+          </div>
           <div>
-            <h2 className={styles.title}>HR Announcements</h2>
-            <span className={styles.subtitle}>Official policies, updates & organization notices</span>
+            <h3>HR Announcements</h3>
+            <span className={styles.headerSub}>{data.length} updates this week</span>
           </div>
         </div>
-        <span className={styles.countBadge}>{announcements.length} Updates</span>
+        <button className={styles.viewAll} onClick={() => navigate("/announcements")}>
+          View all <ArrowRight size={13} />
+        </button>
       </div>
 
-      <div className={styles.grid}>
-        {announcements.map((item) => (
-          <article key={item.id} className={styles.card}>
-            <div className={styles.cardHeader}>
-              <span
-                className={`${styles.categoryTag} ${
-                  item.category === "Benefits"
-                    ? styles.tagBenefits
-                    : item.category === "Policy"
-                    ? styles.tagPolicy
-                    : styles.tagEvent
-                }`}
-              >
-                {item.category}
-              </span>
-              <div className={styles.dateWrap}>
-                <FiCalendar className={styles.dateIcon} />
-                <span>{item.date}</span>
+      <div className={styles.list}>
+        {data.map((item) => {
+          const pCfg = PRIORITY_CONFIG[item.priority] || PRIORITY_CONFIG["Notice"];
+          return (
+            <button key={item.id} className={styles.item}>
+              <div className={styles.itemLeft}>
+                <span
+                  className={styles.priorityDot}
+                  style={{ background: pCfg.dot }}
+                />
               </div>
-            </div>
 
-            <h3 className={styles.cardTitle}>{item.title}</h3>
-            <p className={styles.cardDesc}>{item.description}</p>
+              <div className={styles.itemBody}>
+                <div className={styles.itemTop}>
+                  <span className={`${styles.categoryBadge} ${styles[pCfg.class]}`}>
+                    {item.category || item.priority}
+                  </span>
+                  <span className={styles.itemDate}>{item.date}</span>
+                </div>
+                <h4 className={styles.itemTitle}>{item.title}</h4>
+                {item.description && (
+                  <p className={styles.itemDesc}>{item.description}</p>
+                )}
+                {item.author && (
+                  <span className={styles.itemAuthor}>— {item.author}</span>
+                )}
+              </div>
 
-            <div className={styles.cardFooter}>
-              <span className={styles.author}>Posted by {item.author}</span>
-              <button
-                className={styles.readMoreBtn}
-                aria-label={`Read more about ${item.title}`}
-                onClick={() => alert(`Opening announcement: "${item.title}"`)}
-              >
-                <span>Read details</span>
-                <FiArrowRight className={styles.arrowIcon} />
-              </button>
-            </div>
-          </article>
-        ))}
+              <ChevronRight size={15} className={styles.itemArrow} />
+            </button>
+          );
+        })}
       </div>
-    </section>
+    </div>
   );
-};
+}
 
 export default HRAnnouncements;

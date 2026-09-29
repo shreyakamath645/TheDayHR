@@ -1,127 +1,123 @@
 // src/components/Dashboard/QuickActions/QuickActions.jsx
-// Interactive Quick Action cards with icons, badges, and hover animations
+// Premium Quick Actions card with icons, descriptions, and route navigation
 
 import { useNavigate } from "react-router-dom";
-import { FiVideo, FiMessageSquare, FiCalendar } from "react-icons/fi";
-import { HiOutlineMegaphone } from "react-icons/hi2";
-import { BsArrowRightShort } from "react-icons/bs";
 import styles from "./QuickActions.module.css";
+import {
+  CalendarDays,
+  Wallet,
+  UserPlus,
+  Megaphone,
+  MessageCircle,
+  FileText,
+  Video,
+  Users,
+} from "lucide-react";
 
-const ACTIONS = [
+const actions = [
   {
-    id: "join-meeting",
+    icon: Video,
     title: "Join Meeting",
-    subtitle: "Launch active team sync",
-    icon: FiVideo,
+    desc: "Connect to your calls",
     path: "/meetings",
-    badge: "Active",
-    color: "#4F46E5",
-    bg: "#EEF2FF",
-    borderAccent: "rgba(79, 70, 229, 0.2)",
+    color: "#4f46e5",
+    bg: "#eef2ff",
   },
   {
-    id: "start-chat",
+    icon: MessageCircle,
     title: "Start Chat",
-    subtitle: "Send direct & group message",
-    icon: FiMessageSquare,
+    desc: "Message colleagues",
     path: "/chat",
-    badge: "5 Unread",
     color: "#059669",
-    bg: "#ECFDF5",
-    borderAccent: "rgba(5, 150, 105, 0.2)",
+    bg: "#ecfdf5",
   },
   {
-    id: "view-calendar",
-    title: "View Calendar",
-    subtitle: "Review schedule & events",
-    icon: FiCalendar,
+    icon: CalendarDays,
+    title: "Apply Leave",
+    desc: "Submit leave request",
     path: "/calendar",
-    badge: "Today",
-    color: "#D97706",
-    bg: "#FFFBEB",
-    borderAccent: "rgba(217, 119, 6, 0.2)",
+    color: "#d97706",
+    bg: "#fffbeb",
   },
   {
-    id: "hr-announcements",
-    title: "HR Announcements",
-    subtitle: "Policies & company news",
-    icon: HiOutlineMegaphone,
-    path: "#announcements",
-    badge: "New",
-    color: "#7C3AED",
-    bg: "#F5F3FF",
-    borderAccent: "rgba(124, 58, 237, 0.2)",
+    icon: Wallet,
+    title: "Payslip",
+    desc: "Download payslip",
+    path: "/files",
+    color: "#0891b2",
+    bg: "#ecfeff",
+  },
+  {
+    icon: UserPlus,
+    title: "Add Employee",
+    desc: "Onboard new hire",
+    path: "/employees",
+    color: "#7c3aed",
+    bg: "#f5f3ff",
+  },
+  {
+    icon: Megaphone,
+    title: "Announcements",
+    desc: "Latest HR updates",
+    path: "/announcements",
+    color: "#db2777",
+    bg: "#fdf2f8",
+  },
+  {
+    icon: Users,
+    title: "View Teams",
+    desc: "Manage channels",
+    path: "/teams",
+    color: "#16a34a",
+    bg: "#f0fdf4",
+  },
+  {
+    icon: FileText,
+    title: "Documents",
+    desc: "Access policies",
+    path: "/files",
+    color: "#ea580c",
+    bg: "#fff7ed",
   },
 ];
 
-const QuickActions = ({ onActionClick }) => {
+function QuickActions() {
   const navigate = useNavigate();
 
-  const handleAction = (action) => {
-    if (onActionClick) {
-      onActionClick(action);
-    }
-    if (action.path.startsWith("#")) {
-      const element = document.getElementById(action.path.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      navigate(action.path);
-    }
-  };
-
   return (
-    <section className={styles.section} aria-label="Quick Actions">
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <h3>Quick Actions</h3>
+        <span className={styles.headerSub}>Frequently used</span>
+      </div>
+
       <div className={styles.grid}>
-        {ACTIONS.map((action) => {
+        {actions.map((action, index) => {
           const Icon = action.icon;
           return (
             <button
-              key={action.id}
-              id={`quick-action-${action.id}`}
-              className={styles.card}
-              onClick={() => handleAction(action)}
+              key={index}
+              className={styles.actionButton}
+              onClick={() => navigate(action.path)}
               aria-label={action.title}
-              type="button"
+              style={{ "--action-color": action.color, "--action-bg": action.bg }}
             >
-              <div className={styles.cardTop}>
-                <div
-                  className={styles.iconBox}
-                  style={{ backgroundColor: action.bg, color: action.color }}
-                >
-                  <Icon className={styles.actionIcon} />
-                </div>
-                {action.badge && (
-                  <span
-                    className={styles.badge}
-                    style={{
-                      color: action.color,
-                      backgroundColor: action.bg,
-                    }}
-                  >
-                    {action.badge}
-                  </span>
-                )}
+              <div
+                className={styles.iconWrap}
+                style={{ background: action.bg, color: action.color }}
+              >
+                <Icon size={20} strokeWidth={2} />
               </div>
-
-              <div className={styles.cardBody}>
-                <h3 className={styles.actionTitle}>{action.title}</h3>
-                <p className={styles.actionSubtitle}>{action.subtitle}</p>
-              </div>
-
-              <div className={styles.cardFooter}>
-                <span className={styles.actionPrompt} style={{ color: action.color }}>
-                  Open now
-                  <BsArrowRightShort className={styles.arrowIcon} />
-                </span>
+              <div className={styles.actionText}>
+                <span className={styles.actionTitle}>{action.title}</span>
+                <span className={styles.actionDesc}>{action.desc}</span>
               </div>
             </button>
           );
         })}
       </div>
-    </section>
+    </div>
   );
-};
+}
 
 export default QuickActions;

@@ -1,225 +1,196 @@
 /* src/components/Dashboard/OnlineEmployees/OnlineEmployees.module.css */
 
-.container {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  padding: 24px;
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f0f2f8;
 }
 
+/* ── Header ── */
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.titleWrap {
-  display: flex;
   align-items: center;
-  gap: 12px;
+  margin-bottom: 16px;
 }
 
-.headerIconBox {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: #ecfdf5;
-  color: #059669;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-}
-
-.titleRow {
+.headerLeft {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.title {
-  font-size: 16px;
+.headerIcon {
+  color: #4f46e5;
+}
+
+.header h3 {
+  font-size: 14.5px;
   font-weight: 700;
   color: #1e293b;
   margin: 0;
 }
 
-.liveIndicator {
-  display: inline-flex;
+.headerRight {
+  display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 9.5px;
-  font-weight: 800;
-  color: #059669;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  padding: 2px 7px;
-  border-radius: 9999px;
-  letter-spacing: 0.5px;
+  gap: 8px;
 }
 
-.pulsingDot {
-  width: 6px;
-  height: 6px;
-  background: #10b981;
+.onlinePill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.onlineDot {
+  width: 7px;
+  height: 7px;
+  background: #22c55e;
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  animation: pulse 1.8s infinite;
+  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-  }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+  50%       { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
 }
 
-.subtitle {
-  font-size: 12px;
-  color: #64748b;
-  display: block;
-  margin-top: 2px;
-}
-
-.viewAllBtn {
-  display: inline-flex;
+.viewAll {
+  display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
+  gap: 4px;
+  font-size: 12px;
+  color: #4f46e5;
   font-weight: 600;
-  color: #059669;
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 4px 8px;
   border-radius: 8px;
-  transition: all 0.15s ease;
+  transition: background 0.15s;
+  font-family: inherit;
 }
 
-.viewAllBtn:hover {
-  background: #ecfdf5;
-}
+.viewAll:hover { background: #eef2ff; }
 
-.linkIcon {
-  font-size: 13px;
-}
-
-.employeeGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-}
-
-.employeeCard {
-  background: #fafbfc;
-  border: 1px solid #f1f5f9;
-  border-radius: 12px;
-  padding: 16px 12px;
+/* ── List ── */
+.list {
   display: flex;
   flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Employee Row ── */
+.employee {
+  display: flex;
   align-items: center;
-  text-align: center;
-  position: relative;
-  transition: all 0.2s ease;
-}
-
-.employeeCard:hover {
-  background: #ffffff;
-  border-color: #cbd5e1;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.06);
-}
-
-.avatarContainer {
-  margin-bottom: 10px;
-}
-
-.employeeInfo {
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 13px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.12s;
+  border: none;
+  background: transparent;
+  text-align: left;
   width: 100%;
-  margin-bottom: 10px;
+  font-family: inherit;
 }
 
-.empName {
-  display: block;
+.employee:hover {
+  background: #f5f7ff;
+  transform: translateX(3px);
+}
+
+.employee:hover .msgIcon {
+  opacity: 1;
+}
+
+/* ── Info ── */
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: #1e293b;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 2px;
 }
 
-.empRole {
-  display: block;
-  font-size: 11px;
-  font-weight: 500;
-  color: #4f46e5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 2px;
-}
-
-.empDept {
-  display: block;
-  font-size: 10.5px;
+.role {
+  font-size: 11.5px;
   color: #94a3b8;
+  font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-top: 1px;
 }
 
-.cardActions {
+/* ── Actions ── */
+.actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-.actionBtn {
-  width: 32px;
-  height: 32px;
+.statusLabel {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.status_online {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.status_busy {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.status_away {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.status_offline {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
+.msgIcon {
+  width: 28px;
+  height: 28px;
+  background: #eef2ff;
+  color: #4f46e5;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
-  color: #64748b;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.15s ease;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+  flex-shrink: 0;
 }
 
-.actionBtn:hover {
+.employee:hover .msgIcon:hover {
   background: #4f46e5;
-  color: #ffffff;
-  border-color: #4f46e5;
-}
-
-@media (max-width: 1100px) {
-  .employeeGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 680px) {
-  .employeeGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 420px) {
-  .employeeGrid {
-    grid-template-columns: 1fr;
-  }
+  color: #fff;
 }
