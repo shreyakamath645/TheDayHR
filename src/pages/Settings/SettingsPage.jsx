@@ -16,21 +16,22 @@ import {
   Globe,
   Lock,
 } from "lucide-react";
-import { currentUser } from "../../data/dummyData";
+import { useApp } from "../../context/AppContext";
 import Avatar from "../../components/Avatar/Avatar";
 import styles from "./SettingsPage.module.css";
 
 const SettingsPage = () => {
+  const { user, updateUser } = useApp();
   const [activeTab, setActiveTab] = useState("profile"); // 'profile' | 'notifications' | 'preferences' | 'security'
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   // Profile Form State
   const [profileData, setProfileData] = useState({
-    name: currentUser.name,
-    role: currentUser.role,
-    department: currentUser.department,
-    email: currentUser.email,
-    status: currentUser.status,
+    name: user?.name || "Shreya Kamath",
+    role: user?.role || "HR Manager",
+    department: user?.department || "Human Resources",
+    email: user?.email || "shreya.kamath@thedayhr.com",
+    status: user?.status || "online",
     statusMessage: "Focusing on Q3 OKRs and team growth 🚀",
   });
 
@@ -53,6 +54,21 @@ const SettingsPage = () => {
 
   const handleSave = (e) => {
     e.preventDefault();
+    const initials = profileData.name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+
+    updateUser({
+      name: profileData.name,
+      role: profileData.role,
+      department: profileData.department,
+      status: profileData.status,
+      initials,
+    });
+
     setSavedSuccess(true);
     setTimeout(() => setSavedSuccess(false), 3000);
   };

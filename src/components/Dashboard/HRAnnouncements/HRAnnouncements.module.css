@@ -65,7 +65,9 @@
   white-space: nowrap;
 }
 
-.viewAll:hover { background: #eef2ff; }
+.viewAll:hover {
+  background: #eef2ff;
+}
 
 /* ── List ── */
 .list {

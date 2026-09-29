@@ -247,6 +247,26 @@
   text-overflow: ellipsis;
 }
 
+.mobileCloseBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  margin-left: auto;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.mobileCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.mobileBackdrop {
+  display: none;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .sidebar {
@@ -262,8 +282,39 @@
   .collapseBtn { display: none; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .mobileBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 99;
+  }
+
   .sidebar {
-    display: none;
+    position: fixed;
+    left: -280px;
+    top: 0;
+    bottom: 0;
+    width: 260px !important;
+    z-index: 100;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar.mobileOpen {
+    left: 0 !important;
+    display: flex !important;
+  }
+
+  .mobileOpen .brandName,
+  .mobileOpen .navLabel,
+  .mobileOpen .navSectionLabel,
+  .mobileOpen .profileInfo {
+    display: flex !important;
+  }
+
+  .mobileCloseBtn {
+    display: flex;
   }
 }

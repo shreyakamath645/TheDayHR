@@ -1,6 +1,7 @@
 // src/components/Dashboard/WelcomeBanner/WelcomeBanner.jsx
 // Premium Welcome Banner with dynamic greeting, date, and contextual stats
 
+import { useNavigate } from "react-router-dom";
 import { useApp } from "../../../context/AppContext";
 import styles from "./WelcomeBanner.module.css";
 import { CalendarDays, Video, ArrowRight, Sparkles } from "lucide-react";
@@ -22,9 +23,10 @@ function getFormattedDate() {
 }
 
 function WelcomeBanner({ greeting, subtitle }) {
-  const { user } = useApp();
+  const navigate = useNavigate();
+  const { user, setAiAssistantOpen } = useApp();
   const firstName = user?.name?.split(" ")[0] || "Shreya";
-  const greetingText = greeting || `${getGreeting()}, ${firstName}! 👋`;
+  const greetingText = greeting || `${getGreeting()}, ${firstName} 👋`;
   const dateText = getFormattedDate();
 
   return (
@@ -37,19 +39,27 @@ function WelcomeBanner({ greeting, subtitle }) {
         <div className={styles.left}>
           <p className={styles.greeting}>{greetingText}</p>
           <h1 className={styles.heading}>
-            {subtitle || "Your workspace is ready"}
+            {subtitle || "Here's what's happening across TheDayhr today."}
           </h1>
           <p className={styles.subtext}>
             Stay connected, manage your team, and track everything that matters — all in one place.
           </p>
 
           <div className={styles.actions}>
-            <button className={styles.primaryBtn}>
+            <button
+              className={styles.primaryBtn}
+              onClick={() => navigate("/meetings")}
+              aria-label="Join Today's Meeting"
+            >
               <Video size={16} />
-              Join Today's Meeting
+              <span>Join Today's Meeting</span>
             </button>
-            <button className={styles.ghostBtn}>
-              View Schedule
+            <button
+              className={styles.ghostBtn}
+              onClick={() => navigate("/calendar")}
+              aria-label="View Schedule"
+            >
+              <span>View Schedule</span>
               <ArrowRight size={15} />
             </button>
           </div>
@@ -72,13 +82,17 @@ function WelcomeBanner({ greeting, subtitle }) {
               <span className={styles.statLabel}>Meetings</span>
             </div>
             <div className={styles.statPill}>
-              <span className={styles.statNum}>5</span>
-              <span className={styles.statLabel}>Tasks</span>
+              <span className={styles.statNum}>4</span>
+              <span className={styles.statLabel}>Pending Tasks</span>
             </div>
-            <div className={styles.statPill}>
-              <Sparkles size={12} />
-              <span className={styles.statLabel}>AI Ready</span>
-            </div>
+            <button
+              className={`${styles.statPill} ${styles.statPillClickable}`}
+              onClick={() => setAiAssistantOpen(true)}
+              title="Open AI Assistant"
+            >
+              <Sparkles size={12} color="#a5b4fc" />
+              <span className={styles.statLabel}>Ask AI</span>
+            </button>
           </div>
         </div>
       </div>

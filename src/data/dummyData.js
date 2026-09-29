@@ -319,8 +319,8 @@ export const navItems = [
 ];
 
 export const dashboardStats = [
-  { label: "Total Employees", value: "248", change: "+12 this month", trend: "up" },
-  { label: "Present Today", value: "210", change: "84.7% attendance", trend: "up" },
-  { label: "On Leave", value: "18", change: "-3 from yesterday", trend: "down" },
-  { label: "Open Positions", value: "14", change: "+2 new posts", trend: "up" },
+  { label: "Employees", value: "248", change: "+12 this month", trend: "up" },
+  { label: "Online Employees", value: "18", change: "Active now", trend: "up" },
+  { label: "Meetings Today", value: "3", change: "Starting soon", trend: "up" },
+  { label: "Pending Tasks", value: "4", change: "Due today", trend: "down" },
 ];

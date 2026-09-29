@@ -14,21 +14,12 @@
     </filter>
   </defs>
 
-  <!-- App Rounded Base -->
   <rect width="512" height="512" rx="128" fill="url(#bgGrad)" />
-
-  <!-- Subtle Inner Glass Border -->
   <rect x="8" y="8" width="496" height="496" rx="120" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="4" />
-
-  <!-- Sparkle Accent in top right -->
   <path d="M 370 110 Q 370 140 340 140 Q 370 140 370 170 Q 370 140 400 140 Q 370 140 370 110 Z" fill="url(#accentGrad)" />
 
-  <!-- "TD" Monogram Icon -->
   <g filter="url(#dropShadow)" fill="#ffffff">
-    <!-- Letter T -->
     <path d="M 110 180 L 250 180 C 256 180 260 184 260 190 L 260 216 C 260 222 256 226 250 226 L 202 226 L 202 342 C 202 348 198 352 192 352 L 168 352 C 162 352 158 348 158 342 L 158 226 L 110 226 C 104 226 100 222 100 216 L 100 190 C 100 184 104 180 110 180 Z" />
-
-    <!-- Letter D -->
     <path d="M 284 180 L 340 180 C 388 180 416 210 416 266 C 416 322 388 352 340 352 L 284 352 C 278 352 274 348 274 342 L 274 190 C 274 184 278 180 284 180 Z M 318 226 L 318 306 L 338 306 C 364 306 376 292 376 266 C 376 240 364 226 338 226 L 318 226 Z" />
   </g>
 </svg>
