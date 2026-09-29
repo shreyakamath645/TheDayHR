@@ -10,7 +10,10 @@ import MeetingsPage from "../components/Meetings/MeetingsPage";
 import EmployeesPage from "../components/Employees/EmployeesPage";
 import CalendarPage from "../pages/Calendar/CalendarPage";
 import AnnouncementsPage from "../pages/Announcements/AnnouncementsPage";
-import Placeholder from "../pages/Placeholder/Placeholder";
+import FilesPage from "../pages/Files/FilesPage";
+import AnalyticsPage from "../pages/Analytics/AnalyticsPage";
+import SettingsPage from "../pages/Settings/SettingsPage";
+import HelpPage from "../pages/Help/HelpPage";
 
 const AppRoutes = () => (
   <Routes>
@@ -22,10 +25,10 @@ const AppRoutes = () => (
       <Route path="/employees" element={<EmployeesPage />} />
       <Route path="/calendar" element={<CalendarPage />} />
       <Route path="/announcements" element={<AnnouncementsPage />} />
-      <Route path="/files" element={<Placeholder title="Documents & Files" />} />
-      <Route path="/analytics" element={<Placeholder title="Workforce Analytics" />} />
-      <Route path="/settings" element={<Placeholder title="Settings & Preferences" />} />
-      <Route path="/help" element={<Placeholder title="Help & Support" />} />
+      <Route path="/files" element={<FilesPage />} />
+      <Route path="/analytics" element={<AnalyticsPage />} />
+      <Route path="/settings" element={<SettingsPage />} />
+      <Route path="/help" element={<HelpPage />} />
     </Route>
   </Routes>
 );

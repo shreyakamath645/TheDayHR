@@ -1,0 +1,544 @@
+/* src/pages/Files/FilesPage.module.css */
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.4px;
+}
+
+.badge {
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.subtitle {
+  font-size: 13.5px;
+  color: #64748b;
+  margin: 4px 0 0 0;
+}
+
+.uploadBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.uploadBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+}
+
+/* ── Folder Ribbon ── */
+.folderRibbon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.folderPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid #edf2f7;
+  background: #ffffff;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.folderPill:hover {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.folderActive {
+  background: #eef2ff !important;
+  color: #4f46e5 !important;
+  border-color: #c7d2fe !important;
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  margin-bottom: 18px;
+}
+
+.searchWrap {
+  position: relative;
+  max-width: 400px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #1e293b;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.searchInput:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* ── Table Card ── */
+.tableCard {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  background: #f8fafc;
+  padding: 12px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.tableRow {
+  transition: background 0.12s;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.tableRow:hover {
+  background: #f8fafc;
+}
+
+.table td {
+  padding: 14px 18px;
+  vertical-align: middle;
+}
+
+.fileNameCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fileIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pdfIcon {
+  color: #ef4444;
+}
+
+.sheetIcon {
+  color: #10b981;
+}
+
+.docIcon {
+  color: #3b82f6;
+}
+
+.fileNameText {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.categoryTag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #4f46e5;
+  background: #eef2ff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: capitalize;
+}
+
+.metaText {
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.uploaderText {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.actionsCol {
+  text-align: right;
+}
+
+.actionBtns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.iconBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.iconBtn:hover {
+  background: #eef2ff;
+  color: #4f46e5;
+  border-color: #c7d2fe;
+}
+
+/* ── Empty State ── */
+.emptyState {
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.emptyState h3 {
+  font-size: 16px;
+  color: #1e293b;
+  margin: 0 0 6px 0;
+}
+
+.emptyState p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0 0 16px 0;
+}
+
+.resetBtn {
+  background: #eef2ff;
+  color: #4f46e5;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── Modals ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modalCard {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid #f1f5f9;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 22px 16px 22px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.modalIconWrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #eef2ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalHeader h2 {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.modalHeader p {
+  font-size: 12px;
+  color: #64748b;
+  margin: 2px 0 0 0;
+}
+
+.modalForm {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.formGroup input,
+.formGroup select {
+  padding: 9px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #1e293b;
+  outline: none;
+  font-family: inherit;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  border-color: #6366f1;
+}
+
+.dropZone {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.dropZone:hover {
+  border-color: #6366f1;
+  background: #f5f7ff;
+}
+
+.dropIcon {
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.dropText {
+  font-size: 13px;
+  color: #475569;
+  margin: 0 0 4px 0;
+}
+
+.dropText span {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.dropHint {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.cancelBtn {
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submitBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── Preview Modal ── */
+.previewCard {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+}
+
+.previewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.previewTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.previewTitle h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.closeBtn {
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.previewBody {
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.previewDocPlaceholder {
+  text-align: center;
+  max-width: 400px;
+}
+
+.docLargeIcon {
+  color: #6366f1;
+  margin-bottom: 12px;
+}
+
+.previewDocPlaceholder h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.previewDocPlaceholder p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+.verifiedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
