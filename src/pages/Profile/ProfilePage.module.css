@@ -1,0 +1,502 @@
+/* src/pages/Profile/ProfilePage.module.css */
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+/* ── Hero Card ── */
+.heroCard {
+  position: relative;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+}
+
+.heroBg {
+  height: 120px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #6366f1 100%);
+  position: relative;
+}
+
+.heroBg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.heroContent {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 28px 22px;
+  margin-top: -44px;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.avatarSection {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.heroAvatar {
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.heroInfo {
+  padding-bottom: 4px;
+}
+
+.heroName {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.heroRole {
+  font-size: 14px;
+  color: #64748b;
+  margin: 2px 0 8px 0;
+  font-weight: 500;
+}
+
+.heroMeta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.metaChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #64748b;
+  background: #f8fafc;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid #edf2f7;
+}
+
+.heroActions {
+  padding-bottom: 4px;
+}
+
+.editBtn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+  transition: all 0.2s;
+}
+
+.editBtn:hover {
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  transform: translateY(-1px);
+}
+
+.editActions {
+  display: flex;
+  gap: 8px;
+}
+
+.saveBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.saveBtn:hover {
+  background: #16a34a;
+}
+
+.cancelBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.cancelBtn:hover {
+  background: #e2e8f0;
+}
+
+/* ── Body Grid ── */
+.bodyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.leftCol, .rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Section Cards ── */
+.infoCard,
+.statusCard,
+.quickNavCard,
+.leaveCard,
+.activityCard {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 18px 0;
+}
+
+.cardTitle svg {
+  color: #4f46e5;
+}
+
+/* ── Info Grid (View Mode) ── */
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.infoRow:last-child {
+  border-bottom: none;
+}
+
+.infoLabel {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.infoValue {
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* ── Form Grid (Edit Mode) ── */
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.formGroup label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.formGroup input,
+.formGroup select {
+  padding: 9px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #1e293b;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* ── Status Pills ── */
+.statusPills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.statusPill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.statusPill:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.statusPillActive {
+  border-color: #4f46e5;
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Quick Nav ── */
+.quickNavBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.quickNavBtn:last-child {
+  margin-bottom: 0;
+}
+
+.quickNavBtn:hover {
+  background: #f8fafc;
+  color: #4f46e5;
+}
+
+.quickNavBtn svg:first-child {
+  color: #64748b;
+}
+
+.quickNavBtn:hover svg:first-child {
+  color: #4f46e5;
+}
+
+.navArrow {
+  margin-left: auto;
+  color: #cbd5e1;
+  transition: transform 0.2s;
+}
+
+.quickNavBtn:hover .navArrow {
+  transform: translateX(3px);
+  color: #4f46e5;
+}
+
+/* ── Leave Balance ── */
+.leaveGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.leaveItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.leaveHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leaveLabel {
+  font-size: 13px;
+  color: #334155;
+  font-weight: 600;
+}
+
+.leaveCount {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.leaveOf {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.leaveTrack {
+  height: 6px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.leaveFill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.leaveUsed {
+  font-size: 11.5px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* ── Activity Timeline ── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 14px;
+  padding: 12px 0;
+  position: relative;
+}
+
+.timelineItem:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 38px;
+  bottom: -4px;
+  width: 2px;
+  background: #f1f5f9;
+}
+
+.timelineDot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timelineContent {
+  flex: 1;
+  padding-top: 2px;
+}
+
+.timelineText {
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 500;
+  margin: 0 0 3px 0;
+  line-height: 1.4;
+}
+
+.timelineTime {
+  font-size: 11.5px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .bodyGrid {
+    grid-template-columns: 1fr;
+  }
+  .heroContent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .avatarSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .heroContent {
+    padding: 0 16px 18px;
+  }
+  .heroBg {
+    height: 90px;
+  }
+  .heroName {
+    font-size: 18px;
+  }
+  .heroMeta {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

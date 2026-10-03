@@ -14,6 +14,9 @@ import FilesPage from "../pages/Files/FilesPage";
 import AnalyticsPage from "../pages/Analytics/AnalyticsPage";
 import SettingsPage from "../pages/Settings/SettingsPage";
 import HelpPage from "../pages/Help/HelpPage";
+import HRHubPage from "../pages/HRHub/HRHubPage";
+import ProfilePage from "../pages/Profile/ProfilePage";
+import NotFoundPage from "../pages/NotFound/NotFoundPage";
 
 const AppRoutes = () => (
   <Routes>
@@ -29,6 +32,9 @@ const AppRoutes = () => (
       <Route path="/analytics" element={<AnalyticsPage />} />
       <Route path="/settings" element={<SettingsPage />} />
       <Route path="/help" element={<HelpPage />} />
+      <Route path="/hr" element={<HRHubPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
   </Routes>
 );

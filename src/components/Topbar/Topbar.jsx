@@ -35,7 +35,7 @@ const PAGE_TITLES = {
   "/employees":     "Employees",
   "/calendar":      "Calendar",
   "/announcements": "Announcements",
-  "/hr":            "Human Resources",
+  "/hr":            "HR Hub",
   "/files":         "Documents",
   "/analytics":     "Analytics",
   "/settings":      "Settings",

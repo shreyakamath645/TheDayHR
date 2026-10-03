@@ -1,5 +1,5 @@
 // src/data/chatData.js
-// Dummy data for the Chat Page — TheDayHR Day 3
+// Dummy data for the Chat Page — TheDayHR
 
 // ── Chat Users / Contacts ──────────────────────────────────────────────────
 const chatData = [
@@ -11,6 +11,7 @@ const chatData = [
     unread: 2,
     online: true,
     avatar: "https://i.pravatar.cc/150?img=12",
+    initials: "RS",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const chatData = [
     unread: 0,
     online: false,
     avatar: "https://i.pravatar.cc/150?img=20",
+    initials: "HR",
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ const chatData = [
     unread: 1,
     online: true,
     avatar: "https://i.pravatar.cc/150?img=30",
+    initials: "AN",
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ const chatData = [
     unread: 4,
     online: false,
     avatar: "https://i.pravatar.cc/150?img=40",
+    initials: "DT",
   },
   {
     id: 5,
@@ -47,6 +51,7 @@ const chatData = [
     unread: 0,
     online: true,
     avatar: "https://i.pravatar.cc/150?img=50",
+    initials: "AK",
   },
 ];
 
