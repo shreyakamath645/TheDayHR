@@ -5,7 +5,6 @@ import { useState, useMemo } from "react";
 import {
   Users,
   Search,
-  Filter,
   Plus,
   Grid,
   List,
@@ -19,7 +18,6 @@ import EmployeeCard from "./EmployeeCard";
 import styles from "./EmployeesPage.module.css";
 
 const DEPARTMENTS = ["All", "Engineering", "Design", "Marketing", "Finance", "Operations", "Human Resources"];
-const STATUSES = ["All", "online", "busy", "away", "offline"];
 
 const EmployeesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");

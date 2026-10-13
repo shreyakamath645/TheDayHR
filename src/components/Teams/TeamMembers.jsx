@@ -2,7 +2,7 @@
 // Team member directory panel with direct chat actions
 
 import { useNavigate } from "react-router-dom";
-import { MessageSquare, Users, Plus, ShieldCheck } from "lucide-react";
+import { MessageSquare, Users, ShieldCheck } from "lucide-react";
 import Avatar from "../Avatar/Avatar";
 import { employees } from "../../data/dummyData";
 import styles from "./TeamMembers.module.css";

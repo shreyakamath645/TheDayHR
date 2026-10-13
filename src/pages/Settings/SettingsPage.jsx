@@ -9,11 +9,7 @@ import {
   Shield,
   Save,
   Check,
-  Sparkles,
   Camera,
-  Moon,
-  Sun,
-  Globe,
   Lock,
 } from "lucide-react";
 import { useApp } from "../../context/AppContext";

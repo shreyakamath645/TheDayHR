@@ -3,7 +3,7 @@
 
 import { useNavigate } from "react-router-dom";
 import styles from "./TodayMeetings.module.css";
-import { Video, Clock, Users, ArrowRight, Radio } from "lucide-react";
+import { Video, Clock, Users, ArrowRight } from "lucide-react";
 import Avatar from "../../Avatar/Avatar";
 
 const LOCAL_MEETINGS = [

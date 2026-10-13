@@ -2,7 +2,7 @@
 // Detailed meeting card with participant stack, live status, and join meeting flow
 
 import { useState } from "react";
-import { Video, Clock, Users, Link2, Check, ExternalLink, Calendar as CalIcon } from "lucide-react";
+import { Video, Clock, Link2, Check } from "lucide-react";
 import Avatar from "../Avatar/Avatar";
 import styles from "./MeetingCard.module.css";
 

@@ -3,18 +3,12 @@
 
 import { useState } from "react";
 import {
-  TrendingUp,
   Users,
   Award,
   Clock,
-  Briefcase,
   ArrowUpRight,
   ArrowDownRight,
-  Calendar,
   Download,
-  Filter,
-  Layers,
-  PieChart,
   Activity,
 } from "lucide-react";
 import styles from "./AnalyticsPage.module.css";

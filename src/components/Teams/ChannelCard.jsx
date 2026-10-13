@@ -2,7 +2,7 @@
 // Interactive Channel card with member count, last active timestamp, and open channel action
 
 import { useNavigate } from "react-router-dom";
-import { Users, Clock, Hash, ArrowRight, MessageSquare } from "lucide-react";
+import { Users, Clock, Hash, ArrowRight } from "lucide-react";
 import styles from "./ChannelCard.module.css";
 
 function ChannelCard({ title, department = "Engineering Team", members, activity, status = "Active", description }) {

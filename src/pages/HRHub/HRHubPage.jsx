@@ -4,7 +4,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Briefcase,
   CalendarCheck,
   CalendarClock,
   CalendarX2,

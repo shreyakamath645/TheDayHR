@@ -9,9 +9,7 @@ import {
   Plus,
   Clock,
   Video,
-  Users,
   Sparkles,
-  CheckCircle2,
 } from "lucide-react";
 import styles from "./CalendarPage.module.css";
 import { todayMeetings } from "../../data/dummyData";
@@ -31,7 +29,7 @@ const CALENDAR_EVENTS = [
 ];
 
 const CalendarPage = () => {
-  const [currentMonth, setCurrentMonth] = useState("September 2026");
+  const [currentMonth] = useState("September 2026");
   const [selectedDay, setSelectedDay] = useState(29);
   const [showEventModal, setShowEventModal] = useState(false);
   const [events, setEvents] = useState(CALENDAR_EVENTS);

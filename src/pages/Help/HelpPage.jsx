@@ -3,14 +3,12 @@
 
 import { useState } from "react";
 import {
-  HelpCircle,
   Search,
   BookOpen,
   MessageSquare,
   Mail,
   FileQuestion,
   ChevronDown,
-  ExternalLink,
   LifeBuoy,
   Send,
   CheckCircle,

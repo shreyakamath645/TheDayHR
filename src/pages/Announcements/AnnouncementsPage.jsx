@@ -5,14 +5,10 @@ import { useState, useMemo } from "react";
 import {
   Megaphone,
   Search,
-  Filter,
   Plus,
   Calendar,
   User,
-  Tag,
-  Pin,
   CheckCircle,
-  Share2,
   Sparkles,
 } from "lucide-react";
 import { hrAnnouncements } from "../../data/dummyData";

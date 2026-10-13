@@ -8,10 +8,8 @@ import {
   Clock,
   Plus,
   Search,
-  Filter,
   Users,
   Radio,
-  CheckCircle2,
 } from "lucide-react";
 import { todayMeetings } from "../../data/dummyData";
 import MeetingCard from "./MeetingCard";

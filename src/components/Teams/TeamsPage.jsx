@@ -3,7 +3,6 @@
 
 import { useState, useMemo } from "react";
 import {
-  Users,
   Search,
   Plus,
   Hash,
@@ -15,7 +14,6 @@ import {
   Palette,
   TrendingUp,
   DollarSign,
-  Filter,
 } from "lucide-react";
 import styles from "./TeamsPage.module.css";
 import ChannelCard from "./ChannelCard";

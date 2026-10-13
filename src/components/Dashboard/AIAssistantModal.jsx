@@ -2,7 +2,7 @@
 // Interactive conversational AI Assistant modal for HR and workplace questions
 
 import { useState, useRef, useEffect } from "react";
-import { Sparkles, X, Send, Bot, User, CheckCircle2, CornerDownLeft } from "lucide-react";
+import { Sparkles, X, Send, Bot } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import styles from "./AIAssistantModal.module.css";
 

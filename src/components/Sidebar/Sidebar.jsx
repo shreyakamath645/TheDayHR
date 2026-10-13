@@ -1,7 +1,6 @@
 // src/components/Sidebar/Sidebar.jsx
 // Premium TheDayhr sidebar navigation with active states, tooltips, and mobile drawer support
 
-import { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -18,7 +17,6 @@ import {
   Sparkles,
   Briefcase,
   X,
-  User,
 } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import Avatar from "../Avatar/Avatar";

@@ -7,7 +7,6 @@ import {
   BarChart3,
   Settings,
   HelpCircle,
-  FolderLock,
   ArrowRight,
   Sparkles,
   LayoutDashboard,

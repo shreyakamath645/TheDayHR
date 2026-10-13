@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MessageSquare, Mail, Calendar, PhoneCall, Check, MoreVertical } from "lucide-react";
+import { MessageSquare, Mail, Calendar, Check } from "lucide-react";
 import Avatar from "../Avatar/Avatar";
 import styles from "./EmployeeCard.module.css";
 

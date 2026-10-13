@@ -1,7 +1,7 @@
 // src/components/Dashboard/AIAssistantCard.jsx
 // Interactive AI Assistant Card for Dashboard with trigger to open Assistant modal
 
-import { Sparkles, ArrowRight, Bot } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import styles from "./AIAssistantCard.module.css";
 

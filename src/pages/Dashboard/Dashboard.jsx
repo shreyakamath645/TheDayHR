@@ -1,7 +1,6 @@
 // src/pages/Dashboard/Dashboard.jsx
 // Main Home Dashboard for TheDayhr — premium layout
 
-import { useApp } from "../../context/AppContext";
 import {
   todayMeetings,
   recentChats,
@@ -22,8 +21,6 @@ import AIAssistantModal from "../../components/Dashboard/AIAssistantModal";
 import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
-  const { user } = useApp();
-
   return (
     <div className={styles.dashboardWrapper}>
       {/* 1. Welcome Section */}

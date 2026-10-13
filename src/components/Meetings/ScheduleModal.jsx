@@ -2,7 +2,7 @@
 // Interactive modal for scheduling a new Teams video / HR meeting
 
 import { useState } from "react";
-import { X, Calendar, Clock, Video, Users, Sparkles } from "lucide-react";
+import { X, Video, Sparkles } from "lucide-react";
 import styles from "./ScheduleModal.module.css";
 
 const ScheduleModal = ({ isOpen, onClose, onSchedule }) => {

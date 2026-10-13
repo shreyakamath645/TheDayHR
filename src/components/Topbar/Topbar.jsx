@@ -13,15 +13,11 @@ import {
   ChevronDown,
   User,
   LogOut,
-  Check,
   AlertCircle,
   AtSign,
   Video,
   MessageSquare,
   CheckSquare,
-  FileText,
-  Users,
-  Megaphone,
 } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import Avatar from "../Avatar/Avatar";
