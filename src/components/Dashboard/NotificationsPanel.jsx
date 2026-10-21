@@ -1,43 +1,83 @@
-import styles from "./NotificationsPanel.module.css";
-import { Bell } from "lucide-react";
+// src/components/Dashboard/NotificationsPanel.jsx
+// Notifications Panel — connected to AppContext for live notification data
 
-const notifications = [
-  {
-    title: "Design Review starts in 20 minutes",
-    time: "10 min ago",
-    type: "meeting",
-  },
-  {
-    title: "Leave request approved",
-    time: "30 min ago",
-    type: "success",
-  },
-  {
-    title: "Payroll for September is available",
-    time: "1 hour ago",
-    type: "info",
-  },
-  {
-    title: "New company holiday announced",
-    time: "Yesterday",
-    type: "holiday",
-  },
-];
+import { useNavigate } from "react-router-dom";
+import { Bell, AtSign, Video, MessageSquare, CheckSquare, AlertCircle } from "lucide-react";
+import { useApp } from "../../context/AppContext";
+import styles from "./NotificationsPanel.module.css";
+
+const ICON_MAP = {
+  mention:  AtSign,
+  meeting:  Video,
+  message:  MessageSquare,
+  task:     CheckSquare,
+  system:   AlertCircle,
+};
+
+const TYPE_COLORS = {
+  mention:  { bg: "#eef2ff", color: "#4f46e5" },
+  meeting:  { bg: "#ecfdf5", color: "#059669" },
+  message:  { bg: "#f0fdf4", color: "#16a34a" },
+  task:     { bg: "#fffbeb", color: "#d97706" },
+  system:   { bg: "#f1f5f9", color: "#64748b" },
+};
 
 function NotificationsPanel() {
+  const navigate = useNavigate();
+  const { notifs, markRead, markAllRead, unreadCount } = useApp();
+
+  const handleClick = (n) => {
+    markRead(n.id);
+    if (n.type === "meeting") navigate("/meetings");
+    else if (n.type === "message" || n.type === "mention") navigate("/chat");
+    else navigate("/announcements");
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <Bell size={20} />
-        <h3>Notifications</h3>
+        <div className={styles.headerLeft}>
+          <div className={styles.bellWrap}>
+            <Bell size={16} />
+            {unreadCount > 0 && (
+              <span className={styles.bellBadge}>{unreadCount}</span>
+            )}
+          </div>
+          <h3>Notifications</h3>
+        </div>
+        {unreadCount > 0 && (
+          <button className={styles.markAllBtn} onClick={markAllRead}>
+            Mark all read
+          </button>
+        )}
       </div>
 
-      {notifications.map((item, index) => (
-        <div key={index} className={`${styles.notification} ${styles[item.type]}`}>
-          <h4>{item.title}</h4>
-          <span>{item.time}</span>
-        </div>
-      ))}
+      <div className={styles.list}>
+        {notifs.map((n) => {
+          const Icon = ICON_MAP[n.type] || AlertCircle;
+          const colors = TYPE_COLORS[n.type] || TYPE_COLORS.system;
+          return (
+            <button
+              key={n.id}
+              className={`${styles.notification} ${!n.read ? styles.unread : ""}`}
+              onClick={() => handleClick(n)}
+              aria-label={n.message}
+            >
+              <span
+                className={styles.iconWrap}
+                style={{ background: colors.bg, color: colors.color }}
+              >
+                <Icon size={14} />
+              </span>
+              <div className={styles.content}>
+                <p className={styles.message}>{n.message}</p>
+                <span className={styles.time}>{n.time}</span>
+              </div>
+              {!n.read && <span className={styles.unreadDot} aria-hidden="true" />}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

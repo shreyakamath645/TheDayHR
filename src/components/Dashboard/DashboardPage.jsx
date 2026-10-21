@@ -1,5 +1,7 @@
+// src/components/Dashboard/DashboardPage.jsx
+// Legacy Dashboard layout — kept for reference. Active dashboard is at pages/Dashboard/Dashboard.jsx
+
 import WelcomeBanner from "./WelcomeBanner/WelcomeBanner";
-import styles from "./DashboardPage.module.css";
 import StatsCards from "./StatsCards";
 import AttendanceCard from "./AttendanceCard";
 import CalendarWidget from "./CalendarWidget";
@@ -8,8 +10,9 @@ import TodayMeetings from "./TodayMeetings/TodayMeetings";
 import OnlineEmployees from "./OnlineEmployees/OnlineEmployees";
 import RecentChats from "./RecentChats/RecentChats";
 import QuickActions from "./QuickActions/QuickActions";
-import NotificationsPanel from "./NotificationsPanel/NotificationsPanel";
+import NotificationsPanel from "./NotificationsPanel";
 import HRAnnouncements from "./HRAnnouncements/HRAnnouncements";
+import styles from "./DashboardPage.module.css";
 
 function DashboardPage() {
   return (
@@ -22,22 +25,24 @@ function DashboardPage() {
         <AttendanceCard />
         <CalendarWidget />
         <AIAssistantCard />
+      </div>
+
+      <div className={styles.widgets}>
         <TodayMeetings />
         <OnlineEmployees />
-      <div/>
+      </div>
 
       <div className={styles.bottomWidgets}>
-  <RecentChats />
-</div>
+        <RecentChats />
+      </div>
 
       <div className={styles.bottomGrid}>
-  <QuickActions />
-</div>
-        
+        <QuickActions />
+      </div>
+
       <div className={styles.notificationGrid}>
-  <NotificationsPanel />
-  <HRAnnouncements />
-</div>
+        <NotificationsPanel />
+        <HRAnnouncements />
       </div>
     </div>
   );
