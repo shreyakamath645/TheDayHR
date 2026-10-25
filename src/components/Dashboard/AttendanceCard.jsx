@@ -5,15 +5,44 @@ import { useState, useEffect } from "react";
 import { Clock, CheckCircle, LogIn, LogOut, Activity } from "lucide-react";
 import styles from "./AttendanceCard.module.css";
 
+import { api } from "../../services/api";
+
 function AttendanceCard() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isCheckedIn, setIsCheckedIn] = useState(true);
-  const [checkInTime] = useState("09:08 AM");
+  const [checkInTime, setCheckInTime] = useState("09:08 AM");
 
   useEffect(() => {
     const interval = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    api.attendance.getToday()
+      .then((res) => {
+        if (res?.data) {
+          setIsCheckedIn(!!res.data.isCheckedIn);
+          if (res.data.checkInTime) setCheckInTime(res.data.checkInTime);
+        }
+      })
+      .catch((err) => console.warn("[AttendanceCard] Using local default:", err.message));
+  }, []);
+
+  const handleToggleAttendance = async () => {
+    const nextState = !isCheckedIn;
+    setIsCheckedIn(nextState);
+
+    try {
+      if (nextState) {
+        const res = await api.attendance.checkIn("Office - HQ Bengaluru");
+        if (res?.data?.checkInTime) setCheckInTime(res.data.checkInTime);
+      } else {
+        await api.attendance.checkOut();
+      }
+    } catch (err) {
+      console.warn("[AttendanceCard] Failed to sync toggle with backend:", err.message);
+    }
+  };
 
   const formattedTime = currentTime.toLocaleTimeString("en-IN", {
     hour: "2-digit",
@@ -69,7 +98,7 @@ function AttendanceCard() {
 
       <button
         className={`${styles.actionBtn} ${!isCheckedIn ? styles.actionBtnIn : styles.actionBtnOut}`}
-        onClick={() => setIsCheckedIn(!isCheckedIn)}
+        onClick={handleToggleAttendance}
         aria-label={isCheckedIn ? "Check out" : "Check in"}
       >
         {isCheckedIn ? (

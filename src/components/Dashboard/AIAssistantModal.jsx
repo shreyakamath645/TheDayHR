@@ -4,6 +4,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Sparkles, X, Send, Bot } from "lucide-react";
 import { useApp } from "../../context/AppContext";
+import { api } from "../../services/api";
 import styles from "./AIAssistantModal.module.css";
 
 const QUICK_PROMPTS = [
@@ -54,7 +55,7 @@ function AIAssistantModal() {
 
   if (!aiAssistantOpen) return null;
 
-  const handleSendPrompt = (promptText) => {
+  const handleSendPrompt = async (promptText) => {
     const query = (promptText || input).trim();
     if (!query) return;
 
@@ -62,20 +63,29 @@ function AIAssistantModal() {
     if (!promptText) setInput("");
     setThinking(true);
 
-    setTimeout(() => {
-      let reply = "I found related information in the company handbook. For detailed assistance, you can also raise an HR ticket from the Help & Support page.";
-      const lower = query.toLowerCase();
-
-      for (const [key, value] of Object.entries(KNOWLEDGE_BASE)) {
-        if (lower.includes(key)) {
-          reply = value;
-          break;
-        }
+    try {
+      const res = await api.ai.chat(query);
+      if (res?.data?.reply) {
+        setMessages((prev) => [...prev, { sender: "ai", text: res.data.reply }]);
+        setThinking(false);
+        return;
       }
+    } catch {
+      // Fallback to local knowledge base if backend is unreachable
+    }
 
-      setMessages((prev) => [...prev, { sender: "ai", text: reply }]);
-      setThinking(false);
-    }, 600);
+    let reply = "I found related information in the company handbook. For detailed assistance, you can also raise an HR ticket from the Help & Support page.";
+    const lower = query.toLowerCase();
+
+    for (const [key, value] of Object.entries(KNOWLEDGE_BASE)) {
+      if (lower.includes(key)) {
+        reply = value;
+        break;
+      }
+    }
+
+    setMessages((prev) => [...prev, { sender: "ai", text: reply }]);
+    setThinking(false);
   };
 
   return (

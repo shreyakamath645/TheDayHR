@@ -1,21 +1,22 @@
 // src/context/AppContext.jsx
-// Global state management using React Context API for TheDayhr
+// Global state management using React Context API for TheDayhr integrated with Express API
 
-import { createContext, useContext, useState, useMemo } from "react";
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
 import {
-  currentUser,
-  notifications,
+  currentUser as defaultUser,
+  notifications as defaultNotifications,
   employees,
   todayMeetings,
   hrAnnouncements,
   recentChats,
 } from "../data/dummyData";
+import { api } from "../services/api";
 
 const AppContext = createContext(null);
 
 export const AppProvider = ({ children }) => {
-  const [user, setUser] = useState(currentUser);
-  const [notifs, setNotifs] = useState(notifications);
+  const [user, setUser] = useState(defaultUser);
+  const [notifs, setNotifs] = useState(defaultNotifications);
   const [activeNav, setActiveNav] = useState("dashboard");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -65,8 +66,47 @@ export const AppProvider = ({ children }) => {
     },
   ]);
 
-  const applyLeave = (newRequest) => {
-    const created = {
+  // Initial Fetch from live Express Backend
+  useEffect(() => {
+    let isMounted = true;
+
+    async function fetchInitialData() {
+      try {
+        const [userRes, notifRes, balancesRes, requestsRes] = await Promise.allSettled([
+          api.auth.getProfile(),
+          api.notifications.getAll(),
+          api.leaves.getBalances(),
+          api.leaves.getRequests(),
+        ]);
+
+        if (!isMounted) return;
+
+        if (userRes.status === "fulfilled" && userRes.value?.data) {
+          setUser(userRes.value.data);
+        }
+        if (notifRes.status === "fulfilled" && notifRes.value?.data) {
+          setNotifs(notifRes.value.data);
+        }
+        if (balancesRes.status === "fulfilled" && balancesRes.value?.data) {
+          setLeaveBalances(balancesRes.value.data);
+        }
+        if (requestsRes.status === "fulfilled" && requestsRes.value?.data) {
+          setLeaveRequests(requestsRes.value.data);
+        }
+      } catch (err) {
+        console.warn("[AppContext] Backend initial sync skipped, using local cache:", err.message);
+      }
+    }
+
+    fetchInitialData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const applyLeave = async (newRequest) => {
+    const createdLocal = {
       id: `lv-${Date.now()}`,
       employee: user.name,
       department: user.department,
@@ -74,9 +114,9 @@ export const AppProvider = ({ children }) => {
       appliedOn: "Today",
       ...newRequest,
     };
-    setLeaveRequests((prev) => [created, ...prev]);
+    setLeaveRequests((prev) => [createdLocal, ...prev]);
 
-    // Update user's leave balance
+    // Optimistic balance update
     const categoryKey = newRequest.type?.toLowerCase().includes("sick")
       ? "sick"
       : newRequest.type?.toLowerCase().includes("casual")
@@ -91,22 +131,46 @@ export const AppProvider = ({ children }) => {
         remaining: Math.max(0, prev[categoryKey].remaining - 1),
       },
     }));
+
+    try {
+      const res = await api.leaves.apply(newRequest);
+      if (res?.updatedBalances) {
+        setLeaveBalances(res.updatedBalances);
+      }
+    } catch (err) {
+      console.warn("[AppContext] Failed to sync leave apply with backend:", err.message);
+    }
   };
 
   const unreadCount = notifs.filter((n) => !n.read).length;
 
-  const markAllRead = () => {
+  const markAllRead = async () => {
     setNotifs((prev) => prev.map((n) => ({ ...n, read: true })));
+    try {
+      await api.notifications.markAllRead();
+    } catch (err) {
+      console.warn("[AppContext] Failed to sync markAllRead:", err.message);
+    }
   };
 
-  const markRead = (id) => {
+  const markRead = async (id) => {
     setNotifs((prev) =>
       prev.map((n) => (n.id === id ? { ...n, read: true } : n))
     );
+    try {
+      await api.notifications.markRead(id);
+    } catch (err) {
+      console.warn("[AppContext] Failed to sync markRead:", err.message);
+    }
   };
 
-  const updateUser = (updatedFields) => {
+  const updateUser = async (updatedFields) => {
     setUser((prev) => ({ ...prev, ...updatedFields }));
+    try {
+      await api.auth.updateProfile(updatedFields);
+    } catch (err) {
+      console.warn("[AppContext] Failed to sync profile update:", err.message);
+    }
   };
 
   // Global Search across entire dataset
